@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Something Went Wrong</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100vh;
+      padding: 40px 20px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .content {
+      text-align: center;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+
+    .icon {
+      width: 70px;
+      height: 70px;
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin: 0 auto 20px auto;
+    }
+
+    h1 {
+      font-size: 24px;
+      color: #000;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #777;
+      font-size: 16px;
+    }
+
+    .bottom-btn {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding-bottom: 10px;
+    }
+
+    .ok-btn {
+      background-color: #00d44c;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 18px 0;
+      width: 90%;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .ok-btn:hover {
+      background-color: #00b23e;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <div class="icon">!</div>
+    <h1>Something went wrong</h1>
+    <p>Please try again in a few minutes.</p>
+  </div>
+
+  <div class="bottom-btn">
+    <button class="ok-btn" onclick="goBack()">OK</button>
+  </div>
+
+  <script>
+    function goBack() {
+      // Redirect to previous page
+      if (window.history.length > 1) {
+        history.back();
+      } else {
+        // If no history, redirect to homepage as fallback
+        window.location.href = "/";
+      }
+    }
+
+    // Auto-redirect after 2 seconds
+    setTimeout(goBack, 2000);
+  </script>
+</body>
+</html>
