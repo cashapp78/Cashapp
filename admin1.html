@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Request Access</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f2f2f2;
+      text-align: center;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+    }
+    #message {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    h2{
+      color: #00c244;
+    }
+  </style>
+</head>
+<body>
+  
+  <h2>Request Access</h2>
+  <form id="requestForm">
+    <input type="text" id="name" placeholder="Enter your name" required />
+    <button type="submit">Request Access</button>
+  </form>
+
+  <p id="message"></p>
+  
+
+<!-- Close Button at Bottom Center -->
+<div id="closeBtnContainer">
+  <button id="closeBtn" title="Go to Admin Page" onclick="window.location.href='admin.html'">&times;</button>
+</div>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+   
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDn7BTjXkYpYVFZ14a47RF_pZF7ol6YbaY",
+      authDomain: "mane-ae46a.firebaseapp.com",
+      projectId: "mane-ae46a",
+      storageBucket: "mane-ae46a.firebasestorage.app",
+      messagingSenderId: "350347583165",
+      appId: "1:350347583165:web:203f3ce9e838a05f2121d4",
+      measurementId: "G-8W84BN7W5Y"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const form = document.getElementById('requestForm');
+    const msg = document.getElementById('message');
+
+    // 🚫 Always forget saved access on every visit
+    localStorage.removeItem('accessRequestId');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      if (!name) return;
+
+      try {
+        const requestRef = await db.collection('access_requests').add({
+          name,
+          status: 'pending',
+          requestedAt: new Date()
+        });
+
+        msg.textContent = 'Request submitted! Wait for admin approval...';
+
+        // 🔁 Live listen — for this session only (not saved)
+        db.collection('access_requests').doc(requestRef.id)
+          .onSnapshot(doc => {
+            const data = doc.data();
+            if (!data) return;
+
+            if (data.status === 'approved') {
+              msg.textContent = '✅ Approved! Redirecting...';
+              setTimeout(() => {
+                window.location.href = "start.html"; // Redirect page
+              }, 1500);
+            } else if (data.status === 'denied') {
+              msg.textContent = '❌ Denied. Try again later.';
+            }
+          });
+
+        form.reset();
+      } catch (err) {
+        msg.textContent = 'Error: ' + err.message;
+      }
+    });
+  </script>
+</body>
+</html>
