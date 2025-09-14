@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cash App</title>
+
+   <!-- ✅ Correct Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', sans-serif;
+      background: #f5f5f5;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .notif-icon {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      background: orange;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .notif-icon::after {
+      content: "3";
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: red;
+      color: white;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 50%;
+    }
+
+    h2 {
+      margin-top: 10px;
+    }
+
+    .balance-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .balance-card h3 {
+      margin: 0 0 10px;
+    }
+
+    .balance {
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .account-info {
+      color: gray;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+
+    .action-buttons button {
+      width: 48%;
+      padding: 12px;
+      border: none;
+      background: #eaeaea;
+      border-radius: 12px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .paychecks {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .paychecks-icon {
+      background: #00c853;
+      color: white;
+      padding: 10px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 15px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .card h4 {
+      margin: 0 0 5px;
+    }
+
+    .card p {
+      color: gray;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .icon {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .nav-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+
+    .nav-bar div {
+      font-size: 22px;
+      color: gray;
+    }
+    /* Notification container */
+.notification {
+  position: fixed;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1de9b6;
+  color: black;
+  padding: 15px 30px;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 18px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: top 0.5s ease;
+  z-index: 9999;
+  white-space: nowrap;
+  pointer-events: none;
+}
+ .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 45px;
+      border-top: 1px solid #ddd;
+      z-index: 1000;
+    }
+
+    .nav-icon {
+      font-size: 25px;
+      font-weight: 20000;
+      color: gray;
+      text-decoration: none;
+      text-shadow: 0 0 1px gray;
+    }
+
+    .nav-icon.active {
+      color: black;
+    }
+
+    /* Square icon with dot */
+    .custom-square {
+      width: 24px;
+      height: 24px;
+      border: 3px solid gray;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 4px;
+    }
+
+    .custom-square span {
+      width: 6px;
+      height: 6px;
+      background: gray;
+      border-radius: 2px;
+    }
+
+    .custom-square.active {
+      border-color: black;
+    }
+
+    .custom-square.active span {
+      background: black;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-bar">
+      <h2>Money</h2>
+       <div onclick="window.location.href='profile.html'"style="cursor: pointer;" class="notif-icon">👤</div>
+    </div>
+
+    <div class="balance-card">
+      <h3>Cash balance</h3>
+      <div class="balance">$930,080.02</div>
+      <div id="notification"></div>
+      <div class="account-info">Account•••• Routing•••</div>
+      <div class="action-buttons">
+        <button onclick="window.location.href='error.html'">Add money</button>
+        <button onclick="window.location.href='keypad.html'">Withdraw</button>
+      </div>
+    </div>
+
+    <div class="paychecks">
+      <div class="paychecks-icon">💵</div>
+      <div>
+        <strong>Paychecks</strong><br />
+        <small>Get benefits with direct deposit</small>
+      </div>
+    </div>
+
+    <h3>Explore</h3>
+    <div class="grid">
+  <div class="card" onclick="window.location.href='error.html'" style="cursor: pointer;">
+    <div class="icon" style="color: green;">💰</div>
+    <h4>Savings</h4>
+    <p>Up to 4% interest</p>
+  </div>
+      <div class="card" onclick="window.location.href='bitcoin.html'" 
+     style="padding: 20px; border: 1px solid #ddd; border-radius: 10px; text-align: center; cursor: pointer;">
+  <div class="icon" style="color: #00bcd4; font-size: 30px;">₿</div>
+  <h4 style="margin: 10px 0;">Bitcoin</h4>
+  <p style="margin: 0;">Learn and invest</p>
+</div>
+
+    <div class="card" onclick="window.location.href='error.html'" style="cursor: pointer;">
+  <div class="icon" style="color: purple;">📈</div>
+  <h4>Stocks</h4>
+  <p>Invest with $1</p>
+</div>
+
+     <div class="card" onclick="window.location.href='error.html'" style="cursor: pointer;">
+  <div class="icon" style="color: purple;">🏛</div>
+  <h4>Taxes</h4>
+  <p>Pay $0 to file</p>
+</div>
+    </div>
+  </div>
+
+ 
+
+  
+
+</body>
+</html>
+  
+    
+  
+    
+      
+
+
+   
+  <!-- Bottom Navigation Bar -->
+  <div class="bottom-nav">
+    <!-- Home -->
+    <a href="home1.html" class="nav-icon active">
+      <i class="fas fa-landmark"></i>
+    </a>
+
+    
+
+    <!-- Dollar -->
+    <a href="keypad.html" class="nav-icon">
+      <i class="fas fa-dollar-sign"></i>
+    </a>
+
+    <!-- Search -->
+    <a href="search.html" class="nav-icon">
+      <i class="fas fa-search"></i>
+    </a>
+
+    <!-- Clock -->
+    <a href="history.html" class="nav-icon">
+      <i class="fas fa-clock"></i>
+    </a>
+  </div>
+
+
+
+
+  <div class="container">
+    <div class="option">
+    </div>
+    <p class="description">
+      If you don't have a Cash App Card, a sponsored account, or sponsor an account, your Cash App and savings balances are not deposit products and therefore are not protected by FDIC pass-through insurance.
+    </p>
+    <p class="description">
+      Banking services provided by Cash App’s bank partner(s). Brokerage services by Cash App Investing LLC. member FINRA, subsidiary of Block, Inc. Bitcoin services by Block. Inc. Tax filing services by Cash App Taxes.
+      <span class="disclosure">Disclosures</span>.
+    </p>
+<script>
+  const balanceEl = document.querySelector('.balance');
+
+  let balance = parseFloat(balanceEl.textContent.replace(/[$,]/g, ''));
+
+  // All step values are >= $10,000
+  const steps = [10000, 20000, 30000, 50000, 100000];
+
+  function updateBalance() {
+    // If balance is below 500,000, force increase
+    if (balance < 500000) {
+      const step = steps[Math.floor(Math.random() * steps.length)];
+      balance = Math.min(999999, balance + step);
+    } else {
+      const increase = Math.random() < 0.6;
+      const step = steps[Math.floor(Math.random() * steps.length)];
+      if (increase) {
+        balance = Math.min(999999, balance + step);
+      } else {
+        balance = Math.max(300000, balance - step);
+      }
+    }
+
+    // Update the displayed balance
+    balanceEl.textContent = '$' + balance.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  }
+
+  setInterval(updateBalance, 5000);
+</script>
+ </div>
+</body>
+</html>
