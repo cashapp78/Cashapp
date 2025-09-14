@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cash App</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #ffffff;
+      color: #000;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header-icons {
+      display: flex;
+      gap: 15px;
+      font-size: 22px;
+    }
+    .profile {
+      display: flex;
+      align-items: center;
+      margin-top: 30px;
+    }
+    .avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #f47321;
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      position: relative;
+    }
+    .avatar-camera {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background-color: white;
+      border-radius: 50%;
+      font-size: 14px;
+      padding: 2px;
+    }
+    .username {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .tag {
+      background: #eee;
+      padding: 6px 12px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-top: 5px;
+      font-size: 14px;
+      color: #333;
+    }
+    .section-title {
+      margin-top: 40px;
+      font-weight: bold;
+      font-size: 16px;
+      color: #555;
+    }
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 10px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .item:hover {
+      background: #f9f9f9;
+    }
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .icon {
+      font-size: 18px;
+    }
+    .red-dot {
+      height: 8px;
+      width: 8px;
+      background-color: red;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div onclick="window.location.href='home1.html'" style="cursor: pointer;" onclick="alert">✕</div>
+    <div class="header-icons">
+      <div onclick="alert('QR Code')">📷</div>
+      <div onclick="alert('Share')">📤</div>
+    </div>
+  </div>
+
+  <!-- Profile -->
+  <div class="profile">
+    <div class="avatar">
+      P
+      <div class="avatar-camera">📷</div>
+    </div>
+    <div>
+      <div class="username">Profit Banks</div>
+      <div class="tag">$cryptomatriix</div>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="section">
+    <div class="item" onclick="alert('Verify your identity')">
+      <div class="left"><span class="icon">🔒</span> <span>Verify your identity</span></div>
+      <div>›</div>
+    </div>
+    <div class="item" onclick="alert('Edit profile')">
+      <div class="left"><span class="icon">✏</span> <span>Edit profile</span></div>
+      <div>›</div>
+    </div>
+    <div class="item" onclick="alert('Add a profile photo')">
+      <div class="left"><span class="icon">📸</span> <span>Add a profile photo</span></div>
+      <div>›</div>
+    </div>
+    <div class="item" onclick="alert('Invite friends')">
+      <div class="left"><span class="icon">➕</span> <span>Invite friends <small>(Get $5)</small></span></div>
+      <div>›</div>
+    </div>
+  </div>
+
+  <!-- Account & Settings -->
+  <div class="section">
+    <div class="section-title">Account & Settings</div>
+    <div class="item" onclick="alert('Personal Settings')">
+      <div class="left"><span class="icon">👤</span> <span>Personal</span></div>
+      <div>›</div>
+    </div>
+    <div class="item" onclick="alert('Linked Banks')">
+      <div class="left"><span class="icon">🏦</span> <span>Linked Banks</span></div>
+      <div>›</div>
+    </div>
+    <div class="item" onclick="alert('Security & Privacy')">
+      <div class="left"><span class="icon">🛡</span> <span>Security & Privacy</span></div>
+      <div><span class="red-dot"></span></div>
+    </div>
+    <div class="item" onclick="alert('Favorites')">
+      <div class="left"><span class="icon">⭐</span> <span>Favorites</span></div>
+      <div>›</div>
+    </div>
+  </div>
+
+
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #fff;
+    }
+
+    /* SLIDE-UP ANIMATION */
+    .container {
+        animation: slideUp 0.6s ease-out;
+        padding: 20px;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 10px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .menu-item:hover {
+      background-color: #f9f9f9;
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 16px;
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .red-dot {
+      height: 8px;
+      width: 8px;
+      background-color: red;
+      border-radius: 50%;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      margin: 15px 0 5px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .btn-business {
+      background-color: #eee;
+      color: #000;
+    }
+
+    .btn-signout {
+      background-color: #eee;
+      color: red;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #555;
+      margin-top: 30px;
+    }
+
+    .footer a {
+      color: #000;
+      font-weight: bold;
+      text-decoration: underline;
+      margin: 0 3px;
+    }
+
+    .footer-icons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      font-size: 20px;
+      margin-top: 12px;
+    }
+
+    .version {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menu List -->
+  <div class="menu-item" onclick="alert('Go to Family settings')">
+    <div class="left">👨‍👩‍👧 Family</div>
+    <div>›</div>
+  </div>
+
+  <div class="menu-item" onclick="alert('Check Limits')">
+    <div class="left">📏 Limits</div>
+    <div class="right">
+      <span class="red-dot"></span>
+      <span>›</span>
+    </div>
+  </div>
+
+  <div class="menu-item" onclick="alert('Open Notifications')">
+    <div class="left">🔔 Notifications</div>
+    <div>›</div>
+  </div>
+
+  <div class="menu-item" onclick="alert('Change Themes')">
+    <div class="left">🎨 Themes</div>
+    <div>›</div>
+  </div>
+
+  <div class="menu-item" onclick="alert('View Documents')">
+    <div class="left">📄 Documents</div>
+    <div>›</div>
+  </div>
+
+  <div class="menu-item" onclick="alert('Get Support')">
+    <div class="left">❓ Support</div>
+    <div>›</div>
+  </div>
+
+  <!-- Buttons -->
+  <button class="btn btn-business" onclick="alert('Creating business account...')">Create a business account</button>
+  <button class="btn btn-signout" onclick="alert('Signing out...')">Sign out</button>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>
+      If you don't have a Cash App Card, a sponsored account, or sponsor an account, your Cash App and savings balances are not deposit products and therefore are not protected by FDIC pass-through insurance.
+    </p>
+
+    <p>
+      Cash App’s 
+      <a href="#">Privacy Notice</a>, 
+      <a href="#">Terms of Service</a> and 
+      <a href="#">Open Source Software</a>
+    </p>
+
+    <div class="footer-icons">
+      <span onclick="alert('Open Instagram')">📷</span>
+      <span onclick="alert('Open Twitter')">𝕏</span>
+    </div>
+
+    <div class="version">Version 5.4.0 (5040050)</div>
+  </div>
+
+</body>
+</html>
+
+</body>
+</html>
