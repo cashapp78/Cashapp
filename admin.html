@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>cash app</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #00c244;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-section {
+      background-color: #00c244;
+      color: white;
+      padding: 40px 0 20px;
+      text-align: center;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .bottom-section {
+      background-color: #ffffff;
+      flex: 1;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      padding: 25px 20px 40px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-bottom: 2px solid #ccc;
+      font-size: 16px;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: #005EB8;
+    }
+
+    .show-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      cursor: pointer;
+      color: #005EB8;
+    }
+
+    .checkbox-group {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #00c244;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .forgot-link {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .forgot-link a {
+      color: #005EB8;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .error-message {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-section"> C A S </div>
+  <div class="bottom-section">
+    <div class="input-group">
+      <input type="text" id="username" placeholder="Enter your username" oninput="validateInput()">
+    </div>
+
+    <div class="input-group">
+      <input type="password" id="password" placeholder="Enter your password" oninput="validateInput()">
+      <div class="show-password" onclick="togglePassword()">Show</div>
+    </div>
+
+    <div class="checkbox-group">
+      <label><input type="checkbox" id="remember"> Remember me</label>
+      <label><input type="checkbox"> Use token</label>
+    </div>
+
+    <button class="btn" id="signInBtn" onclick="handleLogin()" disabled>Sign in</button>
+
+    <div class="forgot-link">
+      <a href="#">Forgot username or password?</a>
+    </div>
+
+    <div class="error-message" id="error"></div>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const passwordInput = document.getElementById("password");
+      const toggle = document.querySelector(".show-password");
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggle.textContent = "Hide";
+      } else {
+        passwordInput.type = "password";
+        toggle.textContent = "Show";
+      }
+    }
+
+    function validateInput() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const btn = document.getElementById("signInBtn");
+
+      btn.disabled = !(username === "Ade" && password === "Ade1999");
+    }
+
+    function handleLogin() {
+      const errorDiv = document.getElementById("error");
+      errorDiv.style.color = "green";
+      errorDiv.textContent = "Login successful! Redirecting...";
+      setTimeout(() => {
+        window.location.href = "admin1.html"; // Redirect page
+      }, 1500);
+    }
+  </script>
+</body>
+</html>
