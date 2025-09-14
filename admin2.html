@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Chat</title>
+
+  <style>
+    /* Your existing CSS here - do NOT touch */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: bold;
+      border-bottom: 1px solid #ccc;
+    }
+    .chat-area {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .message {
+      padding: 10px 14px;
+      margin: 8px 0;
+      border-radius: 10px;
+      max-width: 75%;
+    }
+    .user-msg {
+      background-color: #f1f1f1;
+      align-self: flex-start;
+    }
+    .admin-msg {
+      background-color: #d1e7dd;
+      align-self: flex-end;
+    }
+    .chat-input {
+      display: flex;
+      align-items: center;
+      border-top: 1px solid #ccc;
+      padding: 10px 12px;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      font-size: 16px;
+      outline: none;
+      background: transparent;
+    }
+    .chat-input button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      color: #aaa;
+      padding-left: 10px;
+    }
+    .chat-input button.active {
+      color: #1da1f2;
+    }
+
+    /* User list style */
+    #userList {
+      border-bottom: 1px solid #ccc;
+      padding: 10px 20px;
+      max-height: 120px;
+      overflow-y: auto;
+      background: #f9f9f9;
+    }
+    #userList div {
+      padding: 6px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-bottom: 4px;
+    }
+    #userList div.selected {
+      background-color: #1da1f2;
+      color: white;
+    }
+    #closeBtnContainer {
+  position: fixed;
+  top: 20px;
+  left: 20px; /* ✅ Left side */
+  z-index: 999;
+}
+
+#closeBtn {
+  font-size: 20px;
+  background-color: #00c244;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: background-color 0.3s;
+}
+
+#closeBtn:hover {
+  background-color: #333;
+}
+  </style>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <div id="closeBtnContainer">
+  <button id="closeBtn" title="Close Page">&times;</button>
+</div>
+
+  <div class="header" id="chatHeader">Admin Panel – User Chat</div>
+
+  <div id="userList">Loading users...</div>
+
+  <div class="chat-area" id="chatArea"></div>
+
+  <div class="chat-input">
+    <input type="text" id="adminInput" placeholder="Type your reply..." disabled />
+    <button id="adminSendBtn" disabled>➤</button>
+  </div>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDn7BTjXkYpYVFZ14a47RF_pZF7ol6YbaY",
+    authDomain: "mane-ae46a.firebaseapp.com",
+    projectId: "mane-ae46a",
+    storageBucket: "mane-ae46a.firebasestorage.app",
+    messagingSenderId: "350347583165",
+    appId: "1:350347583165:web:203f3ce9e838a05f2121d4",
+    measurementId: "G-8W84BN7W5Y"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  const chatArea = document.getElementById("chatArea");
+  const adminInput = document.getElementById("adminInput");
+  const adminSendBtn = document.getElementById("adminSendBtn");
+  const userList = document.getElementById("userList");
+  const chatHeader = document.getElementById("chatHeader");
+
+  let currentUserId = null;
+  let currentUserName = null;
+  let unsubscribeMessages = null;
+
+  // Handle input button state
+  adminInput.addEventListener("input", () => {
+    const val = adminInput.value.trim();
+    adminSendBtn.disabled = val === "";
+    adminSendBtn.classList.toggle("active", val !== "");
+  });
+
+  // Send admin message and show instantly
+  async function sendAdminReply() {
+    const text = adminInput.value.trim();
+    if (!text || !currentUserId) return;
+
+    // Instantly show admin message
+    const div = document.createElement("div");
+    div.className = "message admin-msg";
+    div.textContent = text;
+    chatArea.appendChild(div);
+    chatArea.scrollTop = chatArea.scrollHeight;
+
+    try {
+      await db.collection("chat").add({
+        sender: "admin",
+        userId: currentUserId,
+        name: currentUserName,
+        text: text,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      adminInput.value = "";
+      adminSendBtn.disabled = true;
+      adminSendBtn.classList.remove("active");
+    } catch (err) {
+      console.error("Error sending admin message:", err);
+    }
+  }
+
+  adminSendBtn.addEventListener("click", sendAdminReply);
+
+  // Load users in real-time
+  function loadUsers() {
+    db.collection("chat")
+      .where("timestamp", "!=", null)
+      .orderBy("timestamp")
+      .onSnapshot(snapshot => {
+        const usersMap = {};
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          if (data.userId && !usersMap[data.userId]) {
+            usersMap[data.userId] = data.name || "Guest";
+          }
+        });
+
+        userList.innerHTML = "";
+        const userIds = Object.keys(usersMap);
+        if (userIds.length === 0) {
+          userList.innerText = "No users yet";
+          chatArea.innerHTML = "";
+          chatHeader.innerText = "Admin Panel – User Chat";
+          adminInput.disabled = true;
+          adminSendBtn.disabled = true;
+          currentUserId = null;
+          currentUserName = null;
+          return;
+        }
+
+        userIds.forEach(uid => {
+          const div = document.createElement("div");
+          div.textContent = usersMap[uid];
+          div.dataset.userid = uid;
+          div.className = uid === currentUserId ? "selected" : "";
+          div.onclick = () => {
+            if (currentUserId !== uid) {
+              currentUserId = uid;
+              currentUserName = usersMap[uid];
+              chatHeader.innerText = "Chat with " + currentUserName;
+              adminInput.disabled = false;
+              loadMessagesForUser(currentUserId);
+              updateSelectedUser();
+            }
+          };
+          userList.appendChild(div);
+        });
+
+        if (!currentUserId && userIds.length > 0) {
+          currentUserId = userIds[0];
+          currentUserName = usersMap[currentUserId];
+          chatHeader.innerText = "Chat with " + currentUserName;
+          adminInput.disabled = false;
+          loadMessagesForUser(currentUserId);
+          updateSelectedUser();
+        }
+      }, error => {
+        console.error("User loading error:", error);
+      });
+  }
+
+  function updateSelectedUser() {
+    [...userList.children].forEach(div => {
+      div.classList.toggle("selected", div.dataset.userid === currentUserId);
+    });
+  }
+
+  // Listen for new messages for selected user
+  function loadMessagesForUser(uid) {
+  if (unsubscribeMessages) unsubscribeMessages();
+
+  chatArea.innerHTML = "";
+
+  unsubscribeMessages = db.collection("chat")
+    .orderBy("timestamp")
+    .onSnapshot(snapshot => {
+      snapshot.docChanges().forEach(change => {
+        if (change.type === "added") {
+          const data = change.doc.data();
+          if (!data.sender || !data.text || data.userId !== uid) return;
+
+          const div = document.createElement("div");
+          div.className = "message " + (data.sender === "admin" ? "admin-msg" : "user-msg");
+          div.textContent = data.text;
+          chatArea.appendChild(div);
+          chatArea.scrollTop = chatArea.scrollHeight;
+        }
+      });
+    }, error => {
+      console.error("Message listener error:", error);
+    });
+}
+
+  loadUsers();
+ function autoDeleteOldMessages() {
+  const now = new Date();
+  const cutoff = new Date(now.getTime() - 45 * 60 * 1000); // 45 minutes ago
+
+  db.collection("chat")
+    .where("timestamp", "<", cutoff)
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        db.collection("chat").doc(doc.id).delete();
+      });
+    })
+    .catch(err => {
+      console.error("Auto-delete failed:", err);
+    });
+}
+
+// Run every 30 seconds
+setInterval(autoDeleteOldMessages, 30000);
+
+  document.getElementById('closeBtn').addEventListener('click', () => {
+    window.location.href = '/admin1.html'; // 🔁 Change this to your destination page
+  });
+
+</script>
+</body>
+</html>
