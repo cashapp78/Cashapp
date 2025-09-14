@@ -1,1 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cash App Support</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
 
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: bold;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .verified {
+      color: #1da1f2;
+      font-size: 16px;
+      margin-left: 6px;
+    }
+
+    .close-btn {
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .info {
+      text-align: center;
+      color: gray;
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+
+    .chat-area {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message {
+      padding: 10px 14px;
+      margin: 8px 0;
+      border-radius: 10px;
+      max-width: 75%;
+    }
+
+    .user-msg {
+      background-color: #f1f1f1;
+      align-self: flex-end;
+    }
+
+    .admin-msg {
+      background-color: #d1e7dd;
+      align-self: flex-start;
+    }
+
+    .chat-input {
+      display: flex;
+      align-items: center;
+      border-top: 1px solid #ccc;
+      padding: 10px 12px;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      font-size: 16px;
+      outline: none;
+      background: transparent;
+    }
+
+    .chat-input button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      color: #aaa;
+      padding-left: 10px;
+    }
+
+    .chat-input button.active {
+      color: #1da1f2;
+    }
+  </style>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+  <div class="header">
+    <span>Cash App Support <span class="verified">✔</span></span>
+    <span class="close-btn" onclick="window.location.href='fee.html'">✕</span>
+  </div>
+
+  <div class="info">Chat on your own schedule. We’ll notify you of new messages.</div>
+
+  <div class="chat-area" id="chatArea"></div>
+
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="Chat with Support" />
+    <button id="userSendBtn">➤</button>
+  </div>
+
+  <script>
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyDNBkXzoq8usiwb4fcNgr1MxFjTreptDlo",
+      authDomain: "cashapp-63506.firebaseapp.com",
+      projectId: "cashapp-63506",
+      storageBucket: "cashapp-63506.appspot.com",
+      messagingSenderId: "524901760517",
+      appId: "1:524901760517:web:4401774290d41e9d22266c"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const chatArea = document.getElementById("chatArea");
+    const chatInput = document.getElementById("chatInput");
+    const sendBtn = document.getElementById("userSendBtn");
+
+    // Get username and userId
+    const userName = localStorage.getItem("reciever_name") || "the receiver";
+    let userId = localStorage.getItem("userId");
+    if (!userId) {
+      userId = "user_" + Math.random().toString(36).substring(2, 10);
+      localStorage.setItem("userId", userId);
+    }
+
+    function goBack() {
+      alert("Closing chat window...");
+    }
+
+    // Toggle send arrow color
+    function toggleUserSend() {
+      if (chatInput.value.trim() !== "") {
+        sendBtn.classList.add("active");
+      } else {
+        sendBtn.classList.remove("active");
+      }
+    }
+
+    // Send user message
+    function sendUserMessage() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+      db.collection("chat").add({
+        sender: "user",
+        text,
+        userId,
+        name: userName,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(() => {
+        chatInput.value = "";
+        toggleUserSend();
+      }).catch(error => {
+        console.error("Send error:", error);
+      });
+    }
+
+    // Event listeners
+    chatInput.addEventListener("input", toggleUserSend);
+    sendBtn.addEventListener("click", sendUserMessage);
+
+    // Real-time listener
+    db.collection("chat").orderBy("timestamp").onSnapshot(snapshot => {
+      chatArea.innerHTML = "";
+      snapshot.forEach(doc => {
+        const msg = doc.data();
+        if (msg.userId === userId || (msg.sender === "admin" && msg.userId === userId)) {
+          const msgDiv = document.createElement("div");
+          msgDiv.className = "message " + (msg.sender === "admin" ? "admin-msg" : "user-msg");
+          msgDiv.innerText = msg.text;
+          chatArea.appendChild(msgDiv);
+        }
+      });
+      chatArea.scrollTop = chatArea.scrollHeight;
+    });
+  </script>
+
+</body>
+</html>
