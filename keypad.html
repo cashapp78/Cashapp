@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cash App</title>
+
+   <!-- ✅ Correct Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #00d632;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      justify-content: space-between;
+      padding-bottom: 40px;
+    }
+    .amount {
+      font-size: 60px;
+      margin-top: 80px;
+      user-select: none;
+    }
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 80px);
+      gap: 55px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .key {
+      font-size: 24px;
+      padding: 20px;
+      background-color: #00d632;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      border: 2px solid white;
+    }
+    .actions {
+      display: flex;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .navbar {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      border-top: 1px solid #ccc;
+      background-color: #00d632;
+      padding: 10px 0;
+    }
+    .action-button {
+      background-color: white;
+      color: #00d632;
+      padding: 15px 30px;
+      border-radius: 25px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #00d632;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 45px;
+      border-top: 1px solid #00d632;
+      z-index: 1000;
+    }
+
+    .nav-icon {
+      font-size: 25px;
+      font-weight: 20000;
+      color: gray;
+      text-decoration: none;
+      text-shadow: 0 0 1px gray;
+    }
+
+    .nav-icon.active {
+      color: black;
+    }
+
+    /* Square icon with dot */
+    .custom-square {
+      width: 24px;
+      height: 24px;
+      border: 3px solid gray;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 4px;
+    }
+
+    .custom-square span {
+      width: 6px;
+      height: 6px;
+      background: gray;
+      border-radius: 2px;
+    }
+
+    .custom-square.active {
+      border-color: black;
+    }
+
+    .custom-square.active span {
+      background: black;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="amount" id="amountDisplay">$0</div>
+
+  <div class="keypad">
+    <div class="key">1</div>
+    <div class="key">2</div>
+    <div class="key">3</div>
+    <div class="key">4</div>
+    <div class="key">5</div>
+    <div class="key">6</div>
+    <div class="key">7</div>
+    <div class="key">8</div>
+    <div class="key">9</div>
+    <div class="key">.</div>
+    <div class="key">0</div>
+    <div class="key" id="backspace">⌫</div>
+  </div>
+
+  <div class="actions">
+    <button class="action-button" onclick="handleRequest()">Request</button>
+    <button class="action-button" onclick="handlePay()">Pay</button>
+  </div>
+
+  <!-- Bottom Navigation Bar -->
+  <div class="bottom-nav">
+    <!-- Home -->
+    <a href="home1.html" class="nav-icon active">
+      <i class="fas fa-landmark"></i>
+    </a>
+
+    
+
+    <!-- Dollar -->
+    <a href="keypad.html" class="nav-icon">
+      <i class="fas fa-dollar-sign"></i>
+    </a>
+
+    <!-- Search -->
+    <a href="search.html" class="nav-icon">
+      <i class="fas fa-search"></i>
+    </a>
+
+    <!-- Clock -->
+    <a href="history.html" class="nav-icon">
+      <i class="fas fa-clock"></i>
+    </a>
+  </div>
+
+  <script>
+    let amountRaw = "";
+
+    // Helper: format a number string with commas & fixed decimals
+    function formatAmount(value) {
+      if (!value) return "$0";
+
+      // Convert string to float safely
+      let num = parseFloat(value);
+      if (isNaN(num)) return "$" + value; // fallback if not a number yet
+
+      // Format with commas & up to 2 decimals
+      return "$" + num.toLocaleString(undefined, {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2
+      });
+    }
+
+    // Update amount display with formatted string
+    function updateDisplay() {
+      document.getElementById("amountDisplay").textContent = formatAmount(amountRaw);
+    }
+
+    // Listen for keypad clicks
+    document.querySelectorAll('.key').forEach(key => {
+      key.addEventListener('click', () => {
+        if (key.id === "backspace") {
+          amountRaw = amountRaw.slice(0, -1);
+        } else {
+          // Prevent multiple decimals
+          if (key.textContent === "." && amountRaw.includes(".")) return;
+          amountRaw += key.textContent;
+        }
+        updateDisplay();
+      });
+    });
+
+    function handlePay() {
+      if (!amountRaw || isNaN(parseFloat(amountRaw)) || parseFloat(amountRaw) <= 0) {
+        alert("Please enter a valid amount greater than 0");
+        return;
+      }
+
+      // Save to localStorage with two decimals fixed
+      localStorage.setItem("amount", parseFloat(amountRaw).toFixed(2));
+
+      // Redirect to your next page where you collect cashtag & note
+      window.location.href = "pay.html";
+    }
+
+    function handleRequest() {
+      alert("Request button clicked. Implement your logic here.");
+    }
+
+    updateDisplay(); // initial call to show $0
+  </script>
+
+</body>
+</html>
