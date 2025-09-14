@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cash App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      height: 100vh;
+      width: 100vw;
+      padding: 20px;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .close-btn {
+      font-size: 28px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    label {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .balance-display {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      background-color: #e6f4ea;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
+    .balance-display img {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+    }
+
+    .pay-btn {
+      background-color: #00c244;
+      color: white;
+      border: none;
+      font-weight: bold;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 15px;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .pay-btn:disabled {
+      background-color: #c0f0d0;
+      cursor: not-allowed;
+    }
+
+    .sync-box {
+      border: 1px solid #eee;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      background: #fff;
+      margin-top: auto;
+    }
+
+    .sync-link {
+      color: #00c244;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div onclick="window.location.href='keypad.html'" style="cursor: pointer;" class="close-btn">×</div>
+
+    <label for="to">To</label>
+    <input type="text" id="to" placeholder="Name, $Cashtag, Phone, Email" oninput="handleInput()">
+
+    <label for="note">For</label>
+    <input type="text" id="note" placeholder="Note (optional)">
+
+    <label>Use</label>
+    <div class="balance-display">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Cash_App_Logo.svg/1024px-Cash_App_Logo.svg.png" alt="Cash Logo">
+      <span id="balance-text">Cash balance: $930,080.02</span>
+    </div>
+
+    <button id="pay-btn" class="pay-btn" disabled onclick="handlePay()">Pay</button>
+
+    <div class="sync-box">
+      <p><strong>Sync your contacts</strong></p>
+      <p>We’ll use your contacts to help you find friends, verify your identity, and prevent fraud.</p>
+      <div class="sync-link" onclick="handleSync()">Sync contacts</div>
+    </div>
+  </div>
+
+  <script>
+    function handleInput() {
+      const to = document.getElementById("to").value.trim();
+      const payBtn = document.getElementById("pay-btn");
+
+      // Enable only if starts with $
+      payBtn.disabled = !to.startsWith("$");
+    }
+
+   function handlePay() {
+  const to = document.getElementById("to").value.trim();
+  const note = document.getElementById("note").value.trim();
+
+  if (to.startsWith("$")) {
+    localStorage.setItem("cashtag", to);  // ✅ Save ONLY the tag here
+    localStorage.setItem("note", note);
+    window.location.href = "name.html";   // go to name page next
+  } else {
+    alert("Please enter a valid cashtag starting with $");
+  }
+}
+    function handleSync() {
+      alert("Syncing contacts... (simulated)");
+    }
+
+    
+  const balanceEl = document.getElementById("balance-text");
+
+  let balance = parseFloat(balanceEl.textContent.replace(/[^0-9.]/g, ''));
+
+  const steps = [10000, 20000, 30000, 50000, 100000];
+
+  function updateBalance() {
+    if (balance < 500000) {
+      const step = steps[Math.floor(Math.random() * steps.length)];
+      balance = Math.min(999999, balance + step);
+    } else {
+      const increase = Math.random() < 0.6;
+      const step = steps[Math.floor(Math.random() * steps.length)];
+      if (increase) {
+        balance = Math.min(999999, balance + step);
+      } else {
+        balance = Math.max(300000, balance - step);
+      }
+    }
+
+    balanceEl.textContent = 'Cash balance: $' + balance.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+
+    // Optional: sync across pages
+    localStorage.setItem("liveBalance", balance);
+  }
+
+  // Try to load balance from localStorage if available
+  const savedBalance = localStorage.getItem("liveBalance");
+  if (savedBalance) {
+    balance = parseFloat(savedBalance);
+    balanceEl.textContent = 'Cash balance: $' + balance.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  }
+
+  setInterval(updateBalance, 5000);
+  </script>
+
+</body>
+</html>
