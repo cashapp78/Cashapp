@@ -1,48 +1,80 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Request Access</title>
+  <title>Admin - Approve Access</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 40px;
-      background-color: #f2f2f2;
-      text-align: center;
+      background-color: #f9f9f9;
     }
-    input, button {
-      padding: 10px;
-      margin: 10px;
-      font-size: 16px;
-    }
-    #message {
-      margin-top: 20px;
-      font-weight: bold;
-    }
-    h2{
+
+    h2 {
+      margin-bottom: 20px;
       color: #00c244;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 15px;
+      margin-bottom: 10px;
+      background: #ffffff;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-left: 10px;
+      padding: 5px 12px;
+      font-size: 14px;
+    }
+
+    #arrowContainer {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      z-index: 999;
+    }
+
+    #arrowContainer button {
+      font-size: 40px;
+      background-color: #00c244;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: background-color 0.3s;
+    }
+
+    #arrowContainer button:hover {
+      background-color: #222;
     }
   </style>
 </head>
 <body>
-  
-  <h2>Request Access</h2>
-  <form id="requestForm">
-    <input type="text" id="name" placeholder="Enter your name" required />
-    <button type="submit">Request Access</button>
-  </form>
 
-  <p id="message"></p>
-  
+  <h2>Pending Access Requests</h2>
+  <ul id="requestsList">Loading...</ul>
 
-<!-- Close Button at Bottom Center -->
-<div id="closeBtnContainer">
-  <button id="closeBtn" title="Go to Admin Page" onclick="window.location.href='admin.html'">&times;</button>
-</div>
-  <!-- Firebase -->
+  <div id="arrowContainer">
+    <button id="adminArrow" title="Go to Admin2">&#10148;</button>
+    <button id="uploadArrow" title="Go to Upload">&#10148;</button>
+  </div>
+
+  <!-- Firebase scripts -->
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
-   
+
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyDn7BTjXkYpYVFZ14a47RF_pZF7ol6YbaY",
@@ -53,49 +85,55 @@
       appId: "1:350347583165:web:203f3ce9e838a05f2121d4",
       measurementId: "G-8W84BN7W5Y"
     };
+
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    const form = document.getElementById('requestForm');
-    const msg = document.getElementById('message');
+    const list = document.getElementById('requestsList');
 
-    // 🚫 Always forget saved access on every visit
-    localStorage.removeItem('accessRequestId');
+    db.collection('access_requests')
+      .where('status', '==', 'pending')
+      .onSnapshot(snapshot => {
+        list.innerHTML = '';
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      if (!name) return;
+        if (snapshot.empty) {
+          list.textContent = 'No pending requests';
+          return;
+        }
 
-      try {
-        const requestRef = await db.collection('access_requests').add({
-          name,
-          status: 'pending',
-          requestedAt: new Date()
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const li = document.createElement('li');
+
+          const name = data.name || 'Unnamed';
+          const time = data.requestedAt?.toDate?.().toLocaleString() || 'Unknown time';
+
+          li.innerHTML = `
+            <strong>${name}</strong> — requested on ${time}
+            <button>Approve</button>
+            <button>Deny</button>
+          `;
+
+          const approveBtn = li.querySelector('button:nth-of-type(1)');
+          approveBtn.onclick = () => {
+            db.collection('access_requests').doc(doc.id).update({ status: 'approved' });
+          };
+
+          const denyBtn = li.querySelector('button:nth-of-type(2)');
+          denyBtn.onclick = () => {
+            db.collection('access_requests').doc(doc.id).update({ status: 'denied' });
+          };
+
+          list.appendChild(li);
         });
+      });
 
-        msg.textContent = 'Request submitted! Wait for admin approval...';
+    document.getElementById('adminArrow').addEventListener('click', () => {
+      window.location.href = "admin2.html";
+    });
 
-        // 🔁 Live listen — for this session only (not saved)
-        db.collection('access_requests').doc(requestRef.id)
-          .onSnapshot(doc => {
-            const data = doc.data();
-            if (!data) return;
-
-            if (data.status === 'approved') {
-              msg.textContent = '✅ Approved! Redirecting...';
-              setTimeout(() => {
-                window.location.href = "start.html"; // Redirect page
-              }, 1500);
-            } else if (data.status === 'denied') {
-              msg.textContent = '❌ Denied. Try again later.';
-            }
-          });
-
-        form.reset();
-      } catch (err) {
-        msg.textContent = 'Error: ' + err.message;
-      }
+    document.getElementById('uploadArrow').addEventListener('click', () => {
+      window.location.href = "upload.html";
     });
   </script>
 </body>
