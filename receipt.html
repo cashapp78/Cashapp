@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cash App Receipt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background-color: white;
+      color: #000;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 150px;
+    }
+
+    .circle {
+      width: 100px;
+      height: 100px;
+      background-color: #1de9b6;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin: 0 auto 20px auto;
+      font-weight: bold;
+      overflow: hidden;
+    }
+
+    .circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .name {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .tag {
+      color: gray;
+      margin-bottom: 40px;
+    }
+
+    .amount {
+      font-size: 48px;
+      font-weight: bold;
+    }
+
+    .time {
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .button-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .pending-pill,
+    .web-receipt {
+      width: 160px;
+      text-align: center;
+      padding: 10px 0;
+      font-weight: bold;
+      font-size: 14px;
+      border-radius: 999px;
+    }
+
+    .pending-pill {
+      background-color: #1de9b6;
+      color: black;
+    }
+
+    .web-receipt {
+      border: 1px solid gray;
+      color: #000;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="circle" id="initial"></div>
+
+  <div class="name" id="fullName">Samson</div>
+  <div class="tag" id="cashtag">Payment to $bangalee</div>
+  <div class="amount" id="amount">$25,600</div>
+  <div class="time" id="timestamp">Today</div>
+
+  <div class="button-wrapper">
+    <div class="pending-pill">pending...</div>
+    <div class="web-receipt" onclick="window.location.href='fee.html'">
+      Web Receipt
+    </div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    // ✅ Your web app's Firebase configuration (replaced)
+    const firebaseConfig = {
+      apiKey: "AIzaSyC4ucy2RmHj0QXu9ItYrq-fUoGWlTCsMvc",
+      authDomain: "authentication-3-5f41a.firebaseapp.com",
+      projectId: "authentication-3-5f41a",
+      storageBucket: "authentication-3-5f41a.firebasestorage.app",
+      messagingSenderId: "1058839188591",
+      appId: "1:1058839188591:web:68ac2f92471bbe546b299a",
+      measurementId: "G-4G7YZYZNZ7"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Get name, cashtag, and amount from localStorage or URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get("user") || localStorage.getItem("receiver_name") || "Samson";
+    const cashtag = localStorage.getItem("cashtag") || "$bangalee";
+    const amount = localStorage.getItem("amount") || "25600";
+
+    const circle = document.getElementById("initial");
+
+    // Load image from Firestore and show in circle
+    db.collection("user_photos").doc("globalProfile").get()
+      .then(doc => {
+        if (doc.exists && doc.data().image) {
+          const img = document.createElement("img");
+          img.src = doc.data().image;
+          circle.appendChild(img);
+        } else {
+          circle.textContent = name.charAt(0).toUpperCase();
+        }
+      })
+      .catch(() => {
+        circle.textContent = name.charAt(0).toUpperCase();
+      });
+
+    // Set text content
+    document.getElementById("fullName").textContent = name;
+    document.getElementById("cashtag").textContent = "Payment to " + cashtag;
+    document.getElementById("amount").textContent = "$" + parseFloat(amount).toLocaleString();
+  </script>
+
+</body>
+</html>
