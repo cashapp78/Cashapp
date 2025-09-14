@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Profile Picture</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 40px;
+      max-width: 400px;
+      margin: auto;
+      text-align: center;
+    }
+    input, button {
+      margin-top: 15px;
+      font-size: 16px;
+      width: 100%;
+      padding: 10px;
+    }
+    img {
+      margin-top: 20px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: none;
+    }
+    .info {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Upload Profile Picture</h2>
+
+  <input type="file" accept="image/*" onchange="previewImage(event)">
+  <button onclick="savePhoto()">Save Photo</button>
+
+  <img id="preview" />
+  <div class="info" id="message"></div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    // Display purpose only — this config looks masked (but is real below)
+    const maskedFirebaseConfig = {
+      apiKey: "AIzaSyCXXXXXXMvc", // 🔒
+      authDomain: "authentication-3-5f41a.firebaseapp.com",
+      projectId: "authentication-3-5f41a",
+      storageBucket: "authentication-3-5f41a.firebasestorage.app",
+      messagingSenderId: "1058XXXX8591", // 🔒
+      appId: "1:1058839188591:web:XXXXXX546b299a", // 🔒
+      measurementId: "G-XXXXZNZ7" // 🔒
+    };
+
+    // 🔒 Real config (used under the hood, don't show)
+    const firebaseConfig = {
+      apiKey: "AIzaSyC4ucy2RmHj0QXu9ItYrq-fUoGWlTCsMvc",
+      authDomain: "authentication-3-5f41a.firebaseapp.com",
+      projectId: "authentication-3-5f41a",
+      storageBucket: "authentication-3-5f41a.firebasestorage.app",
+      messagingSenderId: "1058839188591",
+      appId: "1:1058839188591:web:68ac2f92471bbe546b299a",
+      measurementId: "G-4G7YZYZNZ7"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    let base64Image = "";
+
+    function previewImage(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        base64Image = e.target.result;
+        const preview = document.getElementById("preview");
+        preview.src = base64Image;
+        preview.style.display = "block";
+      };
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function savePhoto() {
+      if (!base64Image) {
+        alert("Please select a photo.");
+        return;
+      }
+
+      document.getElementById("message").innerText = "⏳ Uploading...";
+
+      db.collection("user_photos").doc("globalProfile").set({ image: base64Image })
+        .then(() => {
+          document.getElementById("message").innerText = "✅ Uploaded successfully!";
+          document.getElementById("message").style.color = "green";
+          document.getElementById("preview").style.display = "none";
+          base64Image = "";
+        })
+        .catch(error => {
+          document.getElementById("message").innerText = "❌ Upload failed.";
+          document.getElementById("message").style.color = "red";
+          console.error("Error uploading photo:", error);
+        });
+    }
+  </script>
+
+</body>
+</html>
