@@ -22,6 +22,11 @@
     h2{
       color: #00c244;
     }
+   
+    
+  
+
+  
   </style>
 </head>
 <body>
@@ -43,16 +48,18 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
    
+
+
   <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyDn7BTjXkYpYVFZ14a47RF_pZF7ol6YbaY",
-      authDomain: "mane-ae46a.firebaseapp.com",
-      projectId: "mane-ae46a",
-      storageBucket: "mane-ae46a.firebasestorage.app",
-      messagingSenderId: "350347583165",
-      appId: "1:350347583165:web:203f3ce9e838a05f2121d4",
-      measurementId: "G-8W84BN7W5Y"
-    };
+  const firebaseConfig = {
+  apiKey: "AIzaSyAhBlQd6jZ4ONkEfrZbQZg1UzJdUjRThLk",
+  authDomain: "fir-7083c.firebaseapp.com",
+  projectId: "fir-7083c",
+  storageBucket: "fir-7083c.appspot.com",
+  messagingSenderId: "167722230527",
+  appId: "1:167722230527:web:b20e3a43f0c6d715f6f65a",
+  measurementId: "G-1X1LHPYEXX"
+};
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
@@ -76,21 +83,21 @@
 
         msg.textContent = 'Request submitted! Wait for admin approval...';
 
-        // 🔁 Live listen — for this session only (not saved)
-        db.collection('access_requests').doc(requestRef.id)
-          .onSnapshot(doc => {
-            const data = doc.data();
-            if (!data) return;
+      // 🔁 Live listen — for this session only (not saved)
+db.collection('access_requests').doc(requestRef.id)
+  .onSnapshot(doc => {
+    const data = doc.data();
+    if (!data) return;
 
-            if (data.status === 'approved') {
-              msg.textContent = '✅ Approved! Redirecting...';
-              setTimeout(() => {
-                window.location.href = "start.html"; // Redirect page
-              }, 1500);
-            } else if (data.status === 'denied') {
-              msg.textContent = '❌ Denied. Try again later.';
-            }
-          });
+    if (data.status === 'approved') {
+      msg.textContent = '✅ Approved! Redirecting...';
+      setTimeout(() => {
+        window.location.href = "start.html"; // Redirect page
+      }, 1500);
+    } else if (data.status === 'denied') {
+      msg.textContent = '❌ Denied. Try again later.';
+    }
+  });
 
         form.reset();
       } catch (err) {
