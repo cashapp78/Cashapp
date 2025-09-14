@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cash App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts: Nunito Sans (close to Averta) -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #00C244; /* Cash App green */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Nunito Sans', sans-serif;
+    }
+
+    .text {
+      font-size: 2rem;
+      color: white;
+      font-weight: 700;
+      opacity: 0;
+      animation: fadeIn 1.5s ease-in forwards;
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Fade-out effect */
+    .fade-out {
+      animation: fadeOut 1s forwards;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="text" id="logo">Cash App</div>
+
+  <script>
+    // Fade out before redirect
+    setTimeout(() => {
+      document.getElementById('logo').classList.add('fade-out');
+    }, 2500); // Start fade-out just before redirect
+
+    // Redirect after 3 seconds
+    setTimeout(() => {
+      window.location.href = "home1.html"; // Change to your next page
+    }, 3000);
+  </script>
+</body>
+</html>
