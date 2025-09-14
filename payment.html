@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Sent</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: sans-serif;
+      background-color: white;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      padding: 40px 20px;
+      box-sizing: border-box;
+    }
+
+    .top-section {
+      text-align: center;
+    }
+
+    .icon-success {
+      font-size: 50px;
+      color: white;
+      background-color: #00c244;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 30px auto;
+    }
+
+    .profile-pic {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 20px auto;
+      display: none; /* Only shows if image exists */
+    }
+
+    .message {
+      font-size: 24px;
+      font-weight: bold;
+      color: black;
+      line-height: 1.4;
+    }
+
+    .btn-done {
+      background-color: #00c244;
+      color: white;
+      border: none;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 15px;
+      border-radius: 999px;
+      width: 90%;
+      max-width: 400px;
+      cursor: pointer;
+      margin: 0 auto;
+      margin-bottom: 40px;
+    }
+
+    .btn-done:active {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-section">
+      <div class="icon-success">✓</div>
+      <img class="profile-pic" id="profilePic" alt="Receiver Picture" />
+      <div class="message" id="message">
+        <!-- JS inserts text here -->
+      </div>
+    </div>
+
+    <button class="btn-done" onclick="goToReceipt()">Done</button>
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const amountRaw = localStorage.getItem("amount") || "0.00";
+      const payer = localStorage.getItem("payer_name") || "the sender";
+      const receiver = localStorage.getItem("receiver_name") || "the receiver";
+      const picUrl = localStorage.getItem("receiver_pic") || "";
+
+      const amount = parseFloat(amountRaw).toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+
+      document.getElementById("message").innerHTML = `
+        Sent! $${amount} will be deposited<br>
+        to <strong>${receiver}</strong> once<br>
+        <strong>${payer}</strong> completes the payment.
+      `;
+
+      if (picUrl) {
+        const img = document.getElementById("profilePic");
+        img.src = picUrl;
+        img.style.display = "block";
+      }
+
+      window.goToReceipt = function () {
+        window.location.href = "mail.html";
+      };
+    });
+  </script>
+</body>
+</html>
