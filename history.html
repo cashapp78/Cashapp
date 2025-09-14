@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cash App</title>
+
+  <!-- ✅ Correct Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #fff;
+      color: #000;
+    }
+
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .notif-icon {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      background: orange;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .notif-icon::after {
+      content: "3";
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: red;
+      color: white;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 50%;
+    }
+
+    .search {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      width: 100%;
+    }
+
+    .month-title {
+      margin-top: 30px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+    }
+
+    .circle-avatar {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      border-radius: 50%;
+      background-color: #00c244;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .info {
+      margin-left: 10px;
+    }
+
+    .info p {
+      margin: 2px 0;
+      font-size: 14px;
+    }
+
+    .info small {
+      font-size: 12px;
+      color: gray;
+    }
+
+    .amount {
+      font-weight: bold;
+    }
+     .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 45px;
+      border-top: 1px solid #ddd;
+      z-index: 1000;
+    }
+
+    .nav-icon {
+      font-size: 25px;
+      font-weight: 20000;
+      color: gray;
+      text-decoration: none;
+      text-shadow: 0 0 1px gray;
+    }
+
+    .nav-icon.active {
+      color: black;
+    }
+
+    /* Square icon with dot */
+    .custom-square {
+      width: 24px;
+      height: 24px;
+      border: 3px solid gray;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 4px;
+    }
+
+    .custom-square span {
+      width: 6px;
+      height: 6px;
+      background: gray;
+      border-radius: 2px;
+    }
+
+    .custom-square.active {
+      border-color: black;
+    }
+
+    .custom-square.active span {
+      background: black;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header and Search -->
+  <div class="activity-header">
+    <h2>Activity</h2>
+    <div class="notif-icon" onclick="window.location.href='profile.html'">👤</div>
+  </div>
+  <input type="text" class="search" placeholder="Search transactions">
+
+  <!-- Example Month: June 2025 -->
+  <h3 class="month-title">June 2025</h3>
+
+  <div class="item"><div class="left"><div class="circle-avatar">A</div><div class="info"><p>Amara Jones</p><p>Profit paid 💯</p><small>Jun 21 · completed</small></div></div><div class="amount">$12,340</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">B</div><div class="info"><p>Bobby Klein</p><p>Profit paid 💯</p><small>Jun 20 · completed</small></div></div><div class="amount">$8,750</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">C</div><div class="info"><p>Claire Newton</p><p>Profit paid 💯</p><small>Jun 19 · completed</small></div></div><div class="amount">$23,600</div></div>
+  <!-- (Continue all June 2025 entries...) -->
+
+  <!-- More months (April, March, Feb, Jan 2025, all 2024, 2023) coming next -->
+
+ 
+  
+
+  <!-- June 2025 -->
+  <h3 class="month-title">June 2025</h3>
+  <div class="item"><div class="left"><div class="circle-avatar">A</div><div class="info"><p>Amara Jones</p><p>Profit paid 💯</p><small>Jun 21 · completed</small></div></div><div class="amount">$12,340</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">B</div><div class="info"><p>Bobby Klein</p><p>Profit paid 💯</p><small>Jun 20 · completed</small></div></div><div class="amount">$8,750</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">C</div><div class="info"><p>Claire Newton</p><p>Profit paid 💯</p><small>Jun 19 · completed</small></div></div><div class="amount">$23,600</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">D</div><div class="info"><p>David Lee</p><p>Profit paid 💯</p><small>Jun 18 · completed</small></div></div><div class="amount">$15,200</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">E</div><div class="info"><p>Emily Hart</p><p>Profit paid 💯</p><small>Jun 17 · completed</small></div></div><div class="amount">$19,900</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">F</div><div class="info"><p>Frank Silva</p><p>Profit paid 💯</p><small>Jun 16 · completed</small></div></div><div class="amount">$21,450</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">G</div><div class="info"><p>Grace Park</p><p>Profit paid 💯</p><small>Jun 15 · completed</small></div></div><div class="amount">$18,320</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">H</div><div class="info"><p>Henry Cook</p><p>Profit paid 💯</p><small>Jun 14 · completed</small></div></div><div class="amount">$14,700</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">I</div><div class="info"><p>Isla Bennett</p><p>Profit paid 💯</p><small>Jun 13 · completed</small></div></div><div class="amount">$22,100</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">J</div><div class="info"><p>Jack Morgan</p><p>Profit paid 💯</p><small>Jun 12 · completed</small></div></div><div class="amount">$11,900</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">K</div><div class="info"><p>Karen Fields</p><p>Profit paid 💯</p><small>Jun 11 · completed</small></div></div><div class="amount">$16,800</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">L</div><div class="info"><p>Liam Turner</p><p>Profit paid 💯</p><small>Jun 10 · completed</small></div></div><div class="amount">$13,750</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">M</div><div class="info"><p>Mia Wells</p><p>Profit paid 💯</p><small>Jun 9 · completed</small></div></div><div class="amount">$17,300</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">N</div><div class="info"><p>Noah Howard</p><p>Profit paid 💯</p><small>Jun 8 · completed</small></div></div><div class="amount">$20,800</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">O</div><div class="info"><p>Olivia Price</p><p>Profit paid 💯</p><small>Jun 7 · completed</small></div></div><div class="amount">$9,560</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">P</div><div class="info"><p>Peter Clark</p><p>Profit paid 💯</p><small>Jun 6 · completed</small></div></div><div class="amount">$24,100</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">Q</div><div class="info"><p>Quinn Evans</p><p>Profit paid 💯</p><small>Jun 5 · completed</small></div></div><div class="amount">$19,450</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">R</div><div class="info"><p>Rachel Adams</p><p>Profit paid 💯</p><small>Jun 4 · completed</small></div></div><div class="amount">$18,200</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">S</div><div class="info"><p>Steven Wright</p><p>Profit paid 💯</p><small>Jun 3 · completed</small></div></div><div class="amount">$22,760</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">T</div><div class="info"><p>Tina Ross</p><p>Profit paid 💯</p><small>Jun 2 · completed</small></div></div><div class="amount">$21,900</div></div>
+
+  <!-- April 2025 -->
+  <h3 class="month-title">April 2025</h3>
+  <div class="item"><div class="left"><div class="circle-avatar">U</div><div class="info"><p>Ulysses Grant</p><p>Profit paid 💯</p><small>Apr 30 · completed</small></div></div><div class="amount">$14,800</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">V</div><div class="info"><p>Victoria Hale</p><p>Profit paid 💯</p><small>Apr 29 · completed</small></div></div><div class="amount">$19,700</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">W</div><div class="info"><p>William King</p><p>Profit paid 💯</p><small>Apr 28 · completed</small></div></div><div class="amount">$23,400</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">X</div><div class="info"><p>Xavier Lopez</p><p>Profit paid 💯</p><small>Apr 27 · completed</small></div></div><div class="amount">$17,200</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">Y</div><div class="info"><p>Yara Martin</p><p>Profit paid 💯</p><small>Apr 26 · completed</small></div></div><div class="amount">$15,800</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">Z</div><div class="info"><p>Zachary Nelson</p><p>Profit paid 💯</p><small>Apr 25 · completed</small></div></div><div class="amount">$13,400</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">A</div><div class="info"><p>Aaron Young</p><p>Profit paid 💯</p><small>Apr 24 · completed</small></div></div><div class="amount">$18,950</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">B</div><div class="info"><p>Brianna Scott</p><p>Profit paid 💯</p><small>Apr 23 · completed</small></div></div><div class="amount">$22,100</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">C</div><div class="info"><p>Caleb Turner</p><p>Profit paid 💯</p><small>Apr 22 · completed</small></div></div><div class="amount">$16,750</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">D</div><div class="info"><p>Diana Ross</p><p>Profit paid 💯</p><small>Apr 21 · completed</small></div></div><div class="amount">$19,300</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">E</div><div class="info"><p>Ethan Harris</p><p>Profit paid 💯</p><small>Apr 20 · completed</small></div></div><div class="amount">$20,450</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">F</div><div class="info"><p>Fiona White</p><p>Profit paid 💯</p><small>Apr 19 · completed</small></div></div><div class="amount">$15,100</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">G</div><div class="info"><p>George Miller</p><p>Profit paid 💯</p><small>Apr 18 · completed</small></div></div><div class="amount">$13,900</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">H</div><div class="info"><p>Hannah Moore</p><p>Profit paid 💯</p><small>Apr 17 · completed</small></div></div><div class="amount">$18,600</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">I</div><div class="info"><p>Ian Collins</p><p>Profit paid 💯</p><small>Apr 16 · completed</small></div></div><div class="amount">$22,700</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">J</div><div class="info"><p>Julia Clark</p><p>Profit paid 💯</p><small>Apr 15 · completed</small></div></div><div class="amount">$19,850</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">K</div><div class="info"><p>Kyle Adams</p><p>Profit paid 💯</p><small>Apr 14 · completed</small></div></div><div class="amount">$17,400</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">L</div><div class="info"><p>Laura Evans</p><p>Profit paid 💯</p><small>Apr 13 · completed</small></div></div><div class="amount">$16,250</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">M</div><div class="info"><p>Mark Hill</p><p>Profit paid 💯</p><small>Apr 12 · completed</small></div></div><div class="amount">$21,300</div></div>
+  <div class="item"><div class="left"><div class="circle-avatar">N</div><div class="info"><p>Nina Brooks</p><p>Profit paid 💯</p><small>Apr 11 · completed</small></div></div><div class="amount">$23,150</div></div>
+
+
+  <!-- March 2025 -->
+<h3 class="month-title">March 2025</h3>
+<div class="item"><div class="left"><div class="circle-avatar">O</div><div class="info"><p>Oliver Scott</p><p>Profit paid 💯</p><small>Mar 31 · completed</small></div></div><div class="amount">$20,450</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">P</div><div class="info"><p>Paula Adams</p><p>Profit paid 💯</p><small>Mar 30 · completed</small></div></div><div class="amount">$18,200</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Q</div><div class="info"><p>Quentin Ross</p><p>Profit paid 💯</p><small>Mar 29 · completed</small></div></div><div class="amount">$22,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">R</div><div class="info"><p>Rachel Long</p><p>Profit paid 💯</p><small>Mar 28 · completed</small></div></div><div class="amount">$19,800</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">S</div><div class="info"><p>Samuel Price</p><p>Profit paid 💯</p><small>Mar 27 · completed</small></div></div><div class="amount">$14,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">T</div><div class="info"><p>Tiffany Green</p><p>Profit paid 💯</p><small>Mar 26 · completed</small></div></div><div class="amount">$16,300</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">U</div><div class="info"><p>Umar Khalid</p><p>Profit paid 💯</p><small>Mar 25 · completed</small></div></div><div class="amount">$21,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">V</div><div class="info"><p>Vanessa Lee</p><p>Profit paid 💯</p><small>Mar 24 · completed</small></div></div><div class="amount">$19,600</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">W</div><div class="info"><p>Walter King</p><p>Profit paid 💯</p><small>Mar 23 · completed</small></div></div><div class="amount">$22,500</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">X</div><div class="info"><p>Xena Thomas</p><p>Profit paid 💯</p><small>Mar 22 · completed</small></div></div><div class="amount">$13,850</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Y</div><div class="info"><p>Yosef Malik</p><p>Profit paid 💯</p><small>Mar 21 · completed</small></div></div><div class="amount">$20,950</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Z</div><div class="info"><p>Zara Brooks</p><p>Profit paid 💯</p><small>Mar 20 · completed</small></div></div><div class="amount">$18,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">A</div><div class="info"><p>Adam Wells</p><p>Profit paid 💯</p><small>Mar 19 · completed</small></div></div><div class="amount">$15,400</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">B</div><div class="info"><p>Bianca Cruz</p><p>Profit paid 💯</p><small>Mar 18 · completed</small></div></div><div class="amount">$19,250</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">C</div><div class="info"><p>Carlos Diaz</p><p>Profit paid 💯</p><small>Mar 17 · completed</small></div></div><div class="amount">$17,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">D</div><div class="info"><p>Denise Miller</p><p>Profit paid 💯</p><small>Mar 16 · completed</small></div></div><div class="amount">$21,800</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">E</div><div class="info"><p>Eric Johnson</p><p>Profit paid 💯</p><small>Mar 15 · completed</small></div></div><div class="amount">$20,100</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">F</div><div class="info"><p>Felicity Jones</p><p>Profit paid 💯</p><small>Mar 14 · completed</small></div></div><div class="amount">$18,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">G</div><div class="info"><p>Gavin Clark</p><p>Profit paid 💯</p><small>Mar 13 · completed</small></div></div><div class="amount">$14,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">H</div><div class="info"><p>Holly Wright</p><p>Profit paid 💯</p><small>Mar 12 · completed</small></div></div><div class="amount">$23,400</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">I</div><div class="info"><p>Ian Wilson</p><p>Profit paid 💯</p><small>Mar 11 · completed</small></div></div><div class="amount">$16,850</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">J</div><div class="info"><p>Jasmine Patel</p><p>Profit paid 💯</p><small>Mar 10 · completed</small></div></div><div class="amount">$19,300</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">K</div><div class="info"><p>Karl Thompson</p><p>Profit paid 💯</p><small>Mar 9 · completed</small></div></div><div class="amount">$21,600</div></div>
+<!-- February 2025 -->
+<h3 class="month-title">February 2025</h3>
+<div class="item"><div class="left"><div class="circle-avatar">L</div><div class="info"><p>Larry Page</p><p>Profit paid 💯</p><small>Feb 28 · completed</small></div></div><div class="amount">$18,750</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">M</div><div class="info"><p>Megan Fox</p><p>Profit paid 💯</p><small>Feb 27 · completed</small></div></div><div class="amount">$20,400</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">N</div><div class="info"><p>Nathan Drake</p><p>Profit paid 💯</p><small>Feb 26 · completed</small></div></div><div class="amount">$22,300</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">O</div><div class="info"><p>Olivia Newton</p><p>Profit paid 💯</p><small>Feb 25 · completed</small></div></div><div class="amount">$19,100</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">P</div><div class="info"><p>Peter Parker</p><p>Profit paid 💯</p><small>Feb 24 · completed</small></div></div><div class="amount">$21,750</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Q</div><div class="info"><p>Queenie Bell</p><p>Profit paid 💯</p><small>Feb 23 · completed</small></div></div><div class="amount">$18,950</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">R</div><div class="info"><p>Ryan Reynolds</p><p>Profit paid 💯</p><small>Feb 22 · completed</small></div></div><div class="amount">$20,800</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">S</div><div class="info"><p>Sophia Loren</p><p>Profit paid 💯</p><small>Feb 21 · completed</small></div></div><div class="amount">$19,650</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">T</div><div class="info"><p>Thomas Shelby</p><p>Profit paid 💯</p><small>Feb 20 · completed</small></div></div><div class="amount">$23,200</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">U</div><div class="info"><p>Uma Thurman</p><p>Profit paid 💯</p><small>Feb 19 · completed</small></div></div><div class="amount">$17,500</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">V</div><div class="info"><p>Victor Hugo</p><p>Profit paid 💯</p><small>Feb 18 · completed</small></div></div><div class="amount">$21,400</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">W</div><div class="info"><p>Wendy Darling</p><p>Profit paid 💯</p><small>Feb 17 · completed</small></div></div><div class="amount">$20,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">X</div><div class="info"><p>Xander Cage</p><p>Profit paid 💯</p><small>Feb 16 · completed</small></div></div><div class="amount">$19,200</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Y</div><div class="info"><p>Yara Shahidi</p><p>Profit paid 💯</p><small>Feb 15 · completed</small></div></div><div class="amount">$18,600</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Z</div><div class="info"><p>Zachary Levi</p><p>Profit paid 💯</p><small>Feb 14 · completed</small></div></div><div class="amount">$22,100</div></div>
+<!-- January 2025 -->
+<h3 class="month-title">January 2025</h3>
+<div class="item"><div class="left"><div class="circle-avatar">A</div><div class="info"><p>Alice Cooper</p><p>Profit paid 💯</p><small>Jan 31 · completed</small></div></div><div class="amount">$25,300</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">B</div><div class="info"><p>Ben Affleck</p><p>Profit paid 💯</p><small>Jan 30 · completed</small></div></div><div class="amount">$21,450</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">C</div><div class="info"><p>Cara Delevingne</p><p>Profit paid 💯</p><small>Jan 29 · completed</small></div></div><div class="amount">$22,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">D</div><div class="info"><p>David Beckham</p><p>Profit paid 💯</p><small>Jan 28 · completed</small></div></div><div class="amount">$20,150</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">E</div><div class="info"><p>Eva Mendes</p><p>Profit paid 💯</p><small>Jan 27 · completed</small></div></div><div class="amount">$19,800</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">F</div><div class="info"><p>Frank Ocean</p><p>Profit paid 💯</p><small>Jan 26 · completed</small></div></div><div class="amount">$24,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">G</div><div class="info"><p>Grace Kelly</p><p>Profit paid 💯</p><small>Jan 25 · completed</small></div></div><div class="amount">$23,100</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">H</div><div class="info"><p>Hugh Jackman</p><p>Profit paid 💯</p><small>Jan 24 · completed</small></div></div><div class="amount">$20,750</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">I</div><div class="info"><p>Isla Fisher</p><p>Profit paid 💯</p><small>Jan 23 · completed</small></div></div><div class="amount">$21,300</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">J</div><div class="info"><p>Jason Momoa</p><p>Profit paid 💯</p><small>Jan 22 · completed</small></div></div><div class="amount">$22,400</div></div>
+<!-- December 2024 -->
+<h3 class="month-title">December 2024</h3>
+<div class="item"><div class="left"><div class="circle-avatar">K</div><div class="info"><p>Karen Gillan</p><p>Profit paid 💯</p><small>Dec 31 · completed</small></div></div><div class="amount">$29,500</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">L</div><div class="info"><p>Liam Neeson</p><p>Profit paid 💯</p><small>Dec 30 · completed</small></div></div><div class="amount">$27,800</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">M</div><div class="info"><p>Mila Kunis</p><p>Profit paid 💯</p><small>Dec 29 · completed</small></div></div><div class="amount">$28,100</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">N</div><div class="info"><p>Nick Jonas</p><p>Profit paid 💯</p><small>Dec 28 · completed</small></div></div><div class="amount">$26,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">O</div><div class="info"><p>Olivia Wilde</p><p>Profit paid 💯</p><small>Dec 27 · completed</small></div></div><div class="amount">$27,200</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">P</div><div class="info"><p>Paul Rudd</p><p>Profit paid 💯</p><small>Dec 26 · completed</small></div></div><div class="amount">$25,750</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Q</div><div class="info"><p>Quinn Fabray</p><p>Profit paid 💯</p><small>Dec 25 · completed</small></div></div><div class="amount">$24,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">R</div><div class="info"><p>Ryan Gosling</p><p>Profit paid 💯</p><small>Dec 24 · completed</small></div></div><div class="amount">$28,300</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">S</div><div class="info"><p>Sophia Bush</p><p>Profit paid 💯</p><small>Dec 23 · completed</small></div></div><div class="amount">$27,650</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">T</div><div class="info"><p>Tom Hardy</p><p>Profit paid 💯</p><small>Dec 22 · completed</small></div></div><div class="amount">$29,100</div></div>
+
+<div class="item"><div class="left"><div class="circle-avatar">U</div><div class="info"><p>Uma Thurman</p><p>Profit paid 💯</p><small>Dec 21 · completed</small></div></div><div class="amount">$26,400</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">V</div><div class="info"><p>Vin Diesel</p><p>Profit paid 💯</p><small>Dec 20 · completed</small></div></div><div class="amount">$28,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">W</div><div class="info"><p>Wendy Williams</p><p>Profit paid 💯</p><small>Dec 19 · completed</small></div></div><div class="amount">$25,850</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">X</div><div class="info"><p>Xander Cage</p><p>Profit paid 💯</p><small>Dec 18 · completed</small></div></div><div class="amount">$27,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Y</div><div class="info"><p>Yara Shahidi</p><p>Profit paid 💯</p><small>Dec 17 · completed</small></div></div><div class="amount">$28,200</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Z</div><div class="info"><p>Zoe Saldana</p><p>Profit paid 💯</p><small>Dec 16 · completed</small></div></div><div class="amount">$26,300</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">A</div><div class="info"><p>Aaron Paul</p><p>Profit paid 💯</p><small>Dec 15 · completed</small></div></div><div class="amount">$27,450</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">B</div><div class="info"><p>Brie Larson</p><p>Profit paid 💯</p><small>Dec 14 · completed</small></div></div><div class="amount">$25,750</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">C</div><div class="info"><p>Chris Evans</p><p>Profit paid 💯</p><small>Dec 13 · completed</small></div></div><div class="amount">$29,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">D</div><div class="info"><p>Daisy Ridley</p><p>Profit paid 💯</p><small>Dec 12 · completed</small></div></div><div class="amount">$28,350</div></div>
+
+<div class="item"><div class="left"><div class="circle-avatar">E</div><div class="info"><p>Ethan Hawke</p><p>Profit paid 💯</p><small>Dec 11 · completed</small></div></div><div class="amount">$26,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">F</div><div class="info"><p>Felicity Jones</p><p>Profit paid 💯</p><small>Dec 10 · completed</small></div></div><div class="amount">$27,200</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">G</div><div class="info"><p>Gal Gadot</p><p>Profit paid 💯</p><small>Dec 9 · completed</small></div></div><div class="amount">$28,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">H</div><div class="info"><p>Harrison Ford</p><p>Profit paid 💯</p><small>Dec 8 · completed</small></div></div><div class="amount">$26,150</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">I</div><div class="info"><p>Ian McKellen</p><p>Profit paid 💯</p><small>Dec 7 · completed</small></div></div><div class="amount">$25,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">J</div><div class="info"><p>Jenna Fischer</p><p>Profit paid 💯</p><small>Dec 6 · completed</small></div></div><div class="amount">$27,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">K</div><div class="info"><p>Katie Holmes</p><p>Profit paid 💯</p><small>Dec 5 · completed</small></div></div><div class="amount">$28,400</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">L</div><div class="info"><p>Leonardo DiCaprio</p><p>Profit paid 💯</p><small>Dec 4 · completed</small></div></div><div class="amount">$29,300</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">M</div><div class="info"><p>Morgan Freeman</p><p>Profit paid 💯</p><small>Dec 3 · completed</small></div></div><div class="amount">$27,950</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">N</div><div class="info"><p>Natalie Portman</p><p>Profit paid 💯</p><small>Dec 2 · completed</small></div></div><div class="amount">$26,600</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">O</div><div class="info"><p>Orlando Bloom</p><p>Profit paid 💯</p><small>Dec 1 · completed</small></div></div><div class="amount">$28,750</div></div>
+<!-- November 2024 -->
+<h3 class="month-title">November 2024</h3>
+<div class="item"><div class="left"><div class="circle-avatar">A</div><div class="info"><p>Amanda Seyfried</p><p>Profit paid 💯</p><small>Nov 30 · completed</small></div></div><div class="amount">$24,500</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">B</div><div class="info"><p>Ben Affleck</p><p>Profit paid 💯</p><small>Nov 29 · completed</small></div></div><div class="amount">$23,800</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">C</div><div class="info"><p>Cameron Diaz</p><p>Profit paid 💯</p><small>Nov 28 · completed</small></div></div><div class="amount">$25,100</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">D</div><div class="info"><p>Denzel Washington</p><p>Profit paid 💯</p><small>Nov 27 · completed</small></div></div><div class="amount">$22,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">E</div><div class="info"><p>Emma Stone</p><p>Profit paid 💯</p><small>Nov 26 · completed</small></div></div><div class="amount">$24,200</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">F</div><div class="info"><p>Frank Ocean</p><p>Profit paid 💯</p><small>Nov 25 · completed</small></div></div><div class="amount">$22,750</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">G</div><div class="info"><p>Grace Kelly</p><p>Profit paid 💯</p><small>Nov 24 · completed</small></div></div><div class="amount">$24,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">H</div><div class="info"><p>Hugh Jackman</p><p>Profit paid 💯</p><small>Nov 23 · completed</small></div></div><div class="amount">$23,300</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">I</div><div class="info"><p>Isla Fisher</p><p>Profit paid 💯</p><small>Nov 22 · completed</small></div></div><div class="amount">$24,650</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">J</div><div class="info"><p>Jason Momoa</p><p>Profit paid 💯</p><small>Nov 21 · completed</small></div></div><div class="amount">$25,100</div></div>
+
+<div class="item"><div class="left"><div class="circle-avatar">K</div><div class="info"><p>Kate Winslet</p><p>Profit paid 💯</p><small>Nov 20 · completed</small></div></div><div class="amount">$22,400</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">L</div><div class="info"><p>Lana Del Rey</p><p>Profit paid 💯</p><small>Nov 19 · completed</small></div></div><div class="amount">$23,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">M</div><div class="info"><p>Mark Ruffalo</p><p>Profit paid 💯</p><small>Nov 18 · completed</small></div></div><div class="amount">$24,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">N</div><div class="info"><p>Nina Dobrev</p><p>Profit paid 💯</p><small>Nov 17 · completed</small></div></div><div class="amount">$23,150</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">O</div><div class="info"><p>Owen Wilson</p><p>Profit paid 💯</p><small>Nov 16 · completed</small></div></div><div class="amount">$22,850</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">P</div><div class="info"><p>Penelope Cruz</p><p>Profit paid 💯</p><small>Nov 15 · completed</small></div></div><div class="amount">$24,500</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Q</div><div class="info"><p>Quentin Tarantino</p><p>Profit paid 💯</p><small>Nov 14 · completed</small></div></div><div class="amount">$22,300</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">R</div><div class="info"><p>Rachel McAdams</p><p>Profit paid 💯</p><small>Nov 13 · completed</small></div></div><div class="amount">$23,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">S</div><div class="info"><p>Samuel L. Jackson</p><p>Profit paid 💯</p><small>Nov 12 · completed</small></div></div><div class="amount">$25,300</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">T</div><div class="info"><p>Taylor Swift</p><p>Profit paid 💯</p><small>Nov 11 · completed</small></div></div><div class="amount">$24,800</div></div>
+<!-- October 2024 -->
+<h3 class="month-title">October 2024</h3>
+<div class="item"><div class="left"><div class="circle-avatar">A</div><div class="info"><p>Alicia Keys</p><p>Profit paid 💯</p><small>Oct 31 · completed</small></div></div><div class="amount">$21,450</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">B</div><div class="info"><p>Brad Pitt</p><p>Profit paid 💯</p><small>Oct 30 · completed</small></div></div><div class="amount">$23,100</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">C</div><div class="info"><p>Charlize Theron</p><p>Profit paid 💯</p><small>Oct 29 · completed</small></div></div><div class="amount">$22,300</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">D</div><div class="info"><p>Daniel Craig</p><p>Profit paid 💯</p><small>Oct 28 · completed</small></div></div><div class="amount">$24,550</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">E</div><div class="info"><p>Eva Green</p><p>Profit paid 💯</p><small>Oct 27 · completed</small></div></div><div class="amount">$22,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">F</div><div class="info"><p>Freddie Mercury</p><p>Profit paid 💯</p><small>Oct 26 · completed</small></div></div><div class="amount">$23,750</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">G</div><div class="info"><p>Gal Gadot</p><p>Profit paid 💯</p><small>Oct 25 · completed</small></div></div><div class="amount">$24,100</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">H</div><div class="info"><p>Harrison Ford</p><p>Profit paid 💯</p><small>Oct 24 · completed</small></div></div><div class="amount">$22,650</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">I</div><div class="info"><p>Idris Elba</p><p>Profit paid 💯</p><small>Oct 23 · completed</small></div></div><div class="amount">$23,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">J</div><div class="info"><p>Jessica Alba</p><p>Profit paid 💯</p><small>Oct 22 · completed</small></div></div><div class="amount">$24,450</div></div>
+
+<div class="item"><div class="left"><div class="circle-avatar">K</div><div class="info"><p>Karl Urban</p><p>Profit paid 💯</p><small>Oct 21 · completed</small></div></div><div class="amount">$22,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">L</div><div class="info"><p>Lily Collins</p><p>Profit paid 💯</p><small>Oct 20 · completed</small></div></div><div class="amount">$23,350</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">M</div><div class="info"><p>Michael B. Jordan</p><p>Profit paid 💯</p><small>Oct 19 · completed</small></div></div><div class="amount">$24,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">N</div><div class="info"><p>Natalie Portman</p><p>Profit paid 💯</p><small>Oct 18 · completed</small></div></div><div class="amount">$23,600</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">O</div><div class="info"><p>Orlando Bloom</p><p>Profit paid 💯</p><small>Oct 17 · completed</small></div></div><div class="amount">$22,800</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">P</div><div class="info"><p>Priyanka Chopra</p><p>Profit paid 💯</p><small>Oct 16 · completed</small></div></div><div class="amount">$23,950</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Q</div><div class="info"><p>Queen Latifah</p><p>Profit paid 💯</p><small>Oct 15 · completed</small></div></div><div class="amount">$24,200</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">R</div><div class="info"><p>Ryan Gosling</p><p>Profit paid 💯</p><small>Oct 14 · completed</small></div></div><div class="amount">$22,550</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">S</div><div class="info"><p>Sandra Bullock</p><p>Profit paid 💯</p><small>Oct 13 · completed</small></div></div><div class="amount">$23,850</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">T</div><div class="info"><p>Tom Hardy</p><p>Profit paid 💯</p><small>Oct 12 · completed</small></div></div><div class="amount">$24,500</div></div>
+<!-- August 2024 -->
+<h3 class="month-title">August 2024</h3>
+<div class="item"><div class="left"><div class="circle-avatar">A</div><div class="info"><p>Alice Monroe</p><p>Profit paid 💯</p><small>Aug 31 · completed</small></div></div><div class="amount">$50,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">B</div><div class="info"><p>Brandon Lee</p><p>Profit paid 💯</p><small>Aug 30 · completed</small></div></div><div class="amount">$20,500</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">C</div><div class="info"><p>Candice Swanepoel</p><p>Profit paid 💯</p><small>Aug 29 · completed</small></div></div><div class="amount">$31,200</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">D</div><div class="info"><p>David Beckham</p><p>Profit paid 💯</p><small>Aug 28 · completed</small></div></div><div class="amount">$45,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">E</div><div class="info"><p>Emily Blunt</p><p>Profit paid 💯</p><small>Aug 27 · completed</small></div></div><div class="amount">$22,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">F</div><div class="info"><p>Frank Ocean</p><p>Profit paid 💯</p><small>Aug 26 · completed</small></div></div><div class="amount">$53,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">G</div><div class="info"><p>Grace Kelly</p><p>Profit paid 💯</p><small>Aug 25 · completed</small></div></div><div class="amount">$35,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">H</div><div class="info"><p>Harry Styles</p><p>Profit paid 💯</p><small>Aug 24 · completed</small></div></div><div class="amount">$28,600</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">I</div><div class="info"><p>Isla Fisher</p><p>Profit paid 💯</p><small>Aug 23 · completed</small></div></div><div class="amount">$40,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">J</div><div class="info"><p>Jason Momoa</p><p>Profit paid 💯</p><small>Aug 22 · completed</small></div></div><div class="amount">$20,000</div></div>
+
+<div class="item"><div class="left"><div class="circle-avatar">K</div><div class="info"><p>Kate Winslet</p><p>Profit paid 💯</p><small>Aug 21 · completed</small></div></div><div class="amount">$30,500</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">L</div><div class="info"><p>Liam Neeson</p><p>Profit paid 💯</p><small>Aug 20 · completed</small></div></div><div class="amount">$50,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">M</div><div class="info"><p>Maya Rudolph</p><p>Profit paid 💯</p><small>Aug 19 · completed</small></div></div><div class="amount">$27,800</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">N</div><div class="info"><p>Nathan Fillion</p><p>Profit paid 💯</p><small>Aug 18 · completed</small></div></div><div class="amount">$31,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">O</div><div class="info"><p>Olivia Wilde</p><p>Profit paid 💯</p><small>Aug 17 · completed</small></div></div><div class="amount">$45,500</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">P</div><div class="info"><p>Paul Rudd</p><p>Profit paid 💯</p><small>Aug 16 · completed</small></div></div><div class="amount">$20,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Q</div><div class="info"><p>Quincy Jones</p><p>Profit paid 💯</p><small>Aug 15 · completed</small></div></div><div class="amount">$29,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">R</div><div class="info"><p>Rachel McAdams</p><p>Profit paid 💯</p><small>Aug 14 · completed</small></div></div><div class="amount">$50,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">S</div><div class="info"><p>Samuel L Jackson</p><p>Profit paid 💯</p><small>Aug 13 · completed</small></div></div><div class="amount">$40,300</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">T</div><div class="info"><p>Taylor Swift</p><p>Profit paid 💯</p><small>Aug 12 · completed</small></div></div><div class="amount">$37,000</div></div>
+<!-- July 2024 -->
+<h3 class="month-title">July 2024</h3>
+<div class="item"><div class="left"><div class="circle-avatar">A</div><div class="info"><p>Aaron Paul</p><p>Profit paid 💯</p><small>Jul 31 · completed</small></div></div><div class="amount">$60,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">B</div><div class="info"><p>Bella Hadid</p><p>Profit paid 💯</p><small>Jul 30 · completed</small></div></div><div class="amount">$42,500</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">C</div><div class="info"><p>Chris Evans</p><p>Profit paid 💯</p><small>Jul 29 · completed</small></div></div><div class="amount">$37,200</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">D</div><div class="info"><p>Diana Ross</p><p>Profit paid 💯</p><small>Jul 28 · completed</small></div></div><div class="amount">$54,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">E</div><div class="info"><p>Elijah Wood</p><p>Profit paid 💯</p><small>Jul 27 · completed</small></div></div><div class="amount">$28,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">F</div><div class="info"><p>Fiona Apple</p><p>Profit paid 💯</p><small>Jul 26 · completed</small></div></div><div class="amount">$65,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">G</div><div class="info"><p>George Clooney</p><p>Profit paid 💯</p><small>Jul 25 · completed</small></div></div><div class="amount">$33,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">H</div><div class="info"><p>Halle Berry</p><p>Profit paid 💯</p><small>Jul 24 · completed</small></div></div><div class="amount">$29,600</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">I</div><div class="info"><p>Ian Somerhalder</p><p>Profit paid 💯</p><small>Jul 23 · completed</small></div></div><div class="amount">$44,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">J</div><div class="info"><p>Jessica Alba</p><p>Profit paid 💯</p><small>Jul 22 · completed</small></div></div><div class="amount">$39,000</div></div>
+
+<div class="item"><div class="left"><div class="circle-avatar">K</div><div class="info"><p>Kanye West</p><p>Profit paid 💯</p><small>Jul 21 · completed</small></div></div><div class="amount">$55,500</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">L</div><div class="info"><p>Linda Hamilton</p><p>Profit paid 💯</p><small>Jul 20 · completed</small></div></div><div class="amount">$42,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">M</div><div class="info"><p>Mark Ruffalo</p><p>Profit paid 💯</p><small>Jul 19 · completed</small></div></div><div class="amount">$31,800</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">N</div><div class="info"><p>Naomi Watts</p><p>Profit paid 💯</p><small>Jul 18 · completed</small></div></div><div class="amount">$47,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">O</div><div class="info"><p>Oscar Isaac</p><p>Profit paid 💯</p><small>Jul 17 · completed</small></div></div><div class="amount">$40,500</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">P</div><div class="info"><p>Penelope Cruz</p><p>Profit paid 💯</p><small>Jul 16 · completed</small></div></div><div class="amount">$28,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Q</div><div class="info"><p>Quentin Tarantino</p><p>Profit paid 💯</p><small>Jul 15 · completed</small></div></div><div class="amount">$60,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">R</div><div class="info"><p>Rachel Green</p><p>Profit paid 💯</p><small>Jul 14 · completed</small></div></div><div class="amount">$35,300</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">S</div><div class="info"><p>Samuel L Jackson</p><p>Profit paid 💯</p><small>Jul 13 · completed</small></div></div><div class="amount">$40,600</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">T</div><div class="info"><p>Tina Fey</p><p>Profit paid 💯</p><small>Jul 12 · completed</small></div></div><div class="amount">$37,000</div></div>
+<!-- June 2024 -->
+<h3 class="month-title">June 2024</h3>
+<div class="item"><div class="left"><div class="circle-avatar">U</div><div class="info"><p>Uma Thurman</p><p>Profit paid 💯</p><small>Jun 30 · completed</small></div></div><div class="amount">$55,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">V</div><div class="info"><p>Vince Vaughn</p><p>Profit paid 💯</p><small>Jun 29 · completed</small></div></div><div class="amount">$43,500</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">W</div><div class="info"><p>Will Smith</p><p>Profit paid 💯</p><small>Jun 28 · completed</small></div></div><div class="amount">$50,200</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">X</div><div class="info"><p>Xander Cage</p><p>Profit paid 💯</p><small>Jun 27 · completed</small></div></div><div class="amount">$38,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Y</div><div class="info"><p>Yara Shahidi</p><p>Profit paid 💯</p><small>Jun 26 · completed</small></div></div><div class="amount">$45,600</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Z</div><div class="info"><p>Zoe Saldana</p><p>Profit paid 💯</p><small>Jun 25 · completed</small></div></div><div class="amount">$48,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">A</div><div class="info"><p>Amanda Seyfried</p><p>Profit paid 💯</p><small>Jun 24 · completed</small></div></div><div class="amount">$32,500</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">B</div><div class="info"><p>Ben Affleck</p><p>Profit paid 💯</p><small>Jun 23 · completed</small></div></div><div class="amount">$41,200</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">C</div><div class="info"><p>Cara Delevingne</p><p>Profit paid 💯</p><small>Jun 22 · completed</small></div></div><div class="amount">$44,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">D</div><div class="info"><p>Derek Hough</p><p>Profit paid 💯</p><small>Jun 21 · completed</small></div></div><div class="amount">$29,700</div></div>
+
+<div class="item"><div class="left"><div class="circle-avatar">E</div><div class="info"><p>Emma Watson</p><p>Profit paid 💯</p><small>Jun 20 · completed</small></div></div><div class="amount">$35,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">F</div><div class="info"><p>Fred Savage</p><p>Profit paid 💯</p><small>Jun 19 · completed</small></div></div><div class="amount">$50,400</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">G</div><div class="info"><p>Gina Rodriguez</p><p>Profit paid 💯</p><small>Jun 18 · completed</small></div></div><div class="amount">$42,100</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">H</div><div class="info"><p>Harrison Ford</p><p>Profit paid 💯</p><small>Jun 17 · completed</small></div></div><div class="amount">$39,600</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">I</div><div class="info"><p>Isla Fisher</p><p>Profit paid 💯</p><small>Jun 16 · completed</small></div></div><div class="amount">$36,500</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">J</div><div class="info"><p>Jackie Chan</p><p>Profit paid 💯</p><small>Jun 15 · completed</small></div></div><div class="amount">$47,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">K</div><div class="info"><p>Katie Holmes</p><p>Profit paid 💯</p><small>Jun 14 · completed</small></div></div><div class="amount">$33,800</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">L</div><div class="info"><p>Liam Neeson</p><p>Profit paid 💯</p><small>Jun 13 · completed</small></div></div><div class="amount">$52,300</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">M</div><div class="info"><p>Michelle Pfeiffer</p><p>Profit paid 💯</p><small>Jun 12 · completed</small></div></div><div class="amount">$45,200</div></div>
+<!-- May 2024 -->
+<h3 class="month-title">May 2024</h3>
+<div class="item"><div class="left"><div class="circle-avatar">N</div><div class="info"><p>Natalie Portman</p><p>Profit paid 💯</p><small>May 31 · completed</small></div></div><div class="amount">$53,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">O</div><div class="info"><p>Olivia Wilde</p><p>Profit paid 💯</p><small>May 30 · completed</small></div></div><div class="amount">$44,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">P</div><div class="info"><p>Pierce Brosnan</p><p>Profit paid 💯</p><small>May 29 · completed</small></div></div><div class="amount">$46,300</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Q</div><div class="info"><p>Quinn Fabray</p><p>Profit paid 💯</p><small>May 28 · completed</small></div></div><div class="amount">$39,400</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">R</div><div class="info"><p>Ryan Reynolds</p><p>Profit paid 💯</p><small>May 27 · completed</small></div></div><div class="amount">$48,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">S</div><div class="info"><p>Sophia Bush</p><p>Profit paid 💯</p><small>May 26 · completed</small></div></div><div class="amount">$42,200</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">T</div><div class="info"><p>Timothée Chalamet</p><p>Profit paid 💯</p><small>May 25 · completed</small></div></div><div class="amount">$51,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">U</div><div class="info"><p>Uma Thurman</p><p>Profit paid 💯</p><small>May 24 · completed</small></div></div><div class="amount">$37,600</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">V</div><div class="info"><p>Vin Diesel</p><p>Profit paid 💯</p><small>May 23 · completed</small></div></div><div class="amount">$49,100</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">W</div><div class="info"><p>Winona Ryder</p><p>Profit paid 💯</p><small>May 22 · completed</small></div></div><div class="amount">$45,300</div></div>
+
+<div class="item"><div class="left"><div class="circle-avatar">X</div><div class="info"><p>Xander Cage</p><p>Profit paid 💯</p><small>May 21 · completed</small></div></div><div class="amount">$40,800</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Y</div><div class="info"><p>Yvonne Strahovski</p><p>Profit paid 💯</p><small>May 20 · completed</small></div></div><div class="amount">$38,500</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Z</div><div class="info"><p>Zachary Quinto</p><p>Profit paid 💯</p><small>May 19 · completed</small></div></div><div class="amount">$52,400</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">A</div><div class="info"><p>Alicia Vikander</p><p>Profit paid 💯</p><small>May 18 · completed</small></div></div><div class="amount">$43,100</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">B</div><div class="info"><p>Brie Larson</p><p>Profit paid 💯</p><small>May 17 · completed</small></div></div><div class="amount">$47,800</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">C</div><div class="info"><p>Chris Evans</p><p>Profit paid 💯</p><small>May 16 · completed</small></div></div><div class="amount">$41,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">D</div><div class="info"><p>Daisy Ridley</p><p>Profit paid 💯</p><small>May 15 · completed</small></div></div><div class="amount">$39,200</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">E</div><div class="info"><p>Ed Harris</p><p>Profit paid 💯</p><small>May 14 · completed</small></div></div><div class="amount">$44,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">F</div><div class="info"><p>Felicity Jones</p><p>Profit paid 💯</p><small>May 13 · completed</small></div></div><div class="amount">$50,100</div></div>
+<!-- April 2024 -->
+<h3 class="month-title">April 2024</h3>
+<div class="item"><div class="left"><div class="circle-avatar">G</div><div class="info"><p>Gal Gadot</p><p>Profit paid 💯</p><small>Apr 30 · completed</small></div></div><div class="amount">$48,200</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">H</div><div class="info"><p>Hugh Jackman</p><p>Profit paid 💯</p><small>Apr 29 · completed</small></div></div><div class="amount">$52,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">I</div><div class="info"><p>Idris Elba</p><p>Profit paid 💯</p><small>Apr 28 · completed</small></div></div><div class="amount">$45,600</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">J</div><div class="info"><p>Jennifer Aniston</p><p>Profit paid 💯</p><small>Apr 27 · completed</small></div></div><div class="amount">$47,800</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">K</div><div class="info"><p>Keanu Reeves</p><p>Profit paid 💯</p><small>Apr 26 · completed</small></div></div><div class="amount">$51,300</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">L</div><div class="info"><p>Lady Gaga</p><p>Profit paid 💯</p><small>Apr 25 · completed</small></div></div><div class="amount">$43,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">M</div><div class="info"><p>Michael B. Jordan</p><p>Profit paid 💯</p><small>Apr 24 · completed</small></div></div><div class="amount">$49,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">N</div><div class="info"><p>Nicole Kidman</p><p>Profit paid 💯</p><small>Apr 23 · completed</small></div></div><div class="amount">$46,400</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">O</div><div class="info"><p>Oscar Isaac</p><p>Profit paid 💯</p><small>Apr 22 · completed</small></div></div><div class="amount">$42,100</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">P</div><div class="info"><p>Penélope Cruz</p><p>Profit paid 💯</p><small>Apr 21 · completed</small></div></div><div class="amount">$44,500</div></div>
+
+<div class="item"><div class="left"><div class="circle-avatar">Q</div><div class="info"><p>Quentin Tarantino</p><p>Profit paid 💯</p><small>Apr 20 · completed</small></div></div><div class="amount">$53,100</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">R</div><div class="info"><p>Rihanna</p><p>Profit paid 💯</p><small>Apr 19 · completed</small></div></div><div class="amount">$50,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">S</div><div class="info"><p>Samuel L. Jackson</p><p>Profit paid 💯</p><small>Apr 18 · completed</small></div></div><div class="amount">$48,800</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">T</div><div class="info"><p>Taylor Swift</p><p>Profit paid 💯</p><small>Apr 17 · completed</small></div></div><div class="amount">$52,400</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">U</div><div class="info"><p>Usher Raymond</p><p>Profit paid 💯</p><small>Apr 16 · completed</small></div></div><div class="amount">$46,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">V</div><div class="info"><p>Vanessa Hudgens</p><p>Profit paid 💯</p><small>Apr 15 · completed</small></div></div><div class="amount">$41,600</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">W</div><div class="info"><p>Will Smith</p><p>Profit paid 💯</p><small>Apr 14 · completed</small></div></div><div class="amount">$45,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">X</div><div class="info"><p>Xenia Tchoumitcheva</p><p>Profit paid 💯</p><small>Apr 13 · completed</small></div></div><div class="amount">$49,500</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Y</div><div class="info"><p>Yara Shahidi</p><p>Profit paid 💯</p><small>Apr 12 · completed</small></div></div><div class="amount">$43,200</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Z</div><div class="info"><p>Zoe Saldana</p><p>Profit paid 💯</p><small>Apr 11 · completed</small></div></div><div class="amount">$44,100</div></div>
+<!-- December 2023 -->
+<h3 class="month-title">December 2023</h3>
+<div class="item"><div class="left"><div class="circle-avatar">A</div><div class="info"><p>Aaron Smith</p><p>Profit paid 💯</p><small>Dec 30 · completed</small></div></div><div class="amount">$49,300</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">B</div><div class="info"><p>Betty White</p><p>Profit paid 💯</p><small>Dec 29 · completed</small></div></div><div class="amount">$52,400</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">C</div><div class="info"><p>Charles Brown</p><p>Profit paid 💯</p><small>Dec 28 · completed</small></div></div><div class="amount">$48,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">D</div><div class="info"><p>Diana Green</p><p>Profit paid 💯</p><small>Dec 27 · completed</small></div></div><div class="amount">$51,800</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">E</div><div class="info"><p>Edward Johnson</p><p>Profit paid 💯</p><small>Dec 26 · completed</small></div></div><div class="amount">$50,100</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">F</div><div class="info"><p>Fiona Scott</p><p>Profit paid 💯</p><small>Dec 25 · completed</small></div></div><div class="amount">$53,200</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">G</div><div class="info"><p>George Martin</p><p>Profit paid 💯</p><small>Dec 24 · completed</small></div></div><div class="amount">$49,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">H</div><div class="info"><p>Hannah Lee</p><p>Profit paid 💯</p><small>Dec 23 · completed</small></div></div><div class="amount">$52,800</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">I</div><div class="info"><p>Isaac Young</p><p>Profit paid 💯</p><small>Dec 22 · completed</small></div></div><div class="amount">$50,500</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">J</div><div class="info"><p>Jessica Adams</p><p>Profit paid 💯</p><small>Dec 21 · completed</small></div></div><div class="amount">$51,600</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">K</div><div class="info"><p>Kevin Moore</p><p>Profit paid 💯</p><small>Dec 20 · completed</small></div></div><div class="amount">$48,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">L</div><div class="info"><p>Linda Harris</p><p>Profit paid 💯</p><small>Dec 19 · completed</small></div></div><div class="amount">$52,100</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">M</div><div class="info"><p>Mark Wilson</p><p>Profit paid 💯</p><small>Dec 18 · completed</small></div></div><div class="amount">$50,300</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">N</div><div class="info"><p>Nancy Clark</p><p>Profit paid 💯</p><small>Dec 17 · completed</small></div></div><div class="amount">$53,000</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">O</div><div class="info"><p>Oliver King</p><p>Profit paid 💯</p><small>Dec 16 · completed</small></div></div><div class="amount">$49,600</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">P</div><div class="info"><p>Patricia Evans</p><p>Profit paid 💯</p><small>Dec 15 · completed</small></div></div><div class="amount">$52,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">Q</div><div class="info"><p>Quentin Fox</p><p>Profit paid 💯</p><small>Dec 14 · completed</small></div></div><div class="amount">$50,900</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">R</div><div class="info"><p>Rebecca Stone</p><p>Profit paid 💯</p><small>Dec 13 · completed</small></div></div><div class="amount">$51,400</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">S</div><div class="info"><p>Steven Grant</p><p>Profit paid 💯</p><small>Dec 12 · completed</small></div></div><div class="amount">$49,700</div></div>
+<div class="item"><div class="left"><div class="circle-avatar">T</div><div class="info"><p>Tina Brooks</p><p>Profit paid 💯</p><small>Dec 11 · completed</small></div></div><div class="amount">$52,200</div></div>
+
+ <!-- Bottom Navigation Bar -->
+  <div class="bottom-nav">
+    <!-- Home -->
+    <a href="home1.html" class="nav-icon active">
+      <i class="fas fa-landmark"></i>
+    </a>
+
+    
+
+    <!-- Dollar -->
+    <a href="keypad.html" class="nav-icon">
+      <i class="fas fa-dollar-sign"></i>
+    </a>
+
+    <!-- Search -->
+    <a href="search.html" class="nav-icon">
+      <i class="fas fa-search"></i>
+    </a>
+
+    <!-- Clock -->
+    <a href="history.html" class="nav-icon">
+      <i class="fas fa-clock"></i>
+    </a>
+  </div>
+</body>
+</html>
